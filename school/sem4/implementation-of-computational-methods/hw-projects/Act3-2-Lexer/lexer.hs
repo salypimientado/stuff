@@ -1,32 +1,55 @@
+{-# LANGUAGE OverloadedStrings #-}
 import System.IO
+
+{-
+Contents->Lines
+Lines->Char
+foldl 
+Char State -> nextState
+
+-}
 
 main = do
   putStrLn "Ingrese el nombre del archivo"
   hFlush stdout
   file <- getLine
   contents <- readFile file
+  putStrLn $ concatMap show $ head (lines contents)
   let lexed = lexer (lines contents)
-  putStr $ unlines $ concat $ map (map show) lexed
+  putStrLn $ concatMap show lexed
 
-lexer :: [[Char]] -> [[( Char, Int )]]
-lexer = map (map (flip (lexChar) 0))
+lexer :: [[Char]] -> [Int]
+--lexer = map (map (flip (nextState) 0))
+lexer lines = scanl (\state char -> if state < 100 then nextState state char else nextState 0 char) 0 (head lines)
 
-lexChar :: Char -> Int -> (Char, Int)
-lexChar char state
-  | char == ' '            = ( char, head stateList )
-  | char `elem` ['a'..'z'] = ( char, stateList !! 1 )
-  | char `elem` ['A'..'Z'] = ( char, stateList !! 2 )
-  | char == '_'            = ( char, stateList !! 3 )
-  | char `elem` ['0'..'9'] = ( char, stateList !! 4 )
-  | char == '='            = ( char, stateList !! 5 )
-  | char == '+'            = ( char, stateList !! 6 )
-  | char == '-'            = ( char, stateList !! 7 )
-  | char == '/'            = ( char, stateList !! 8 )
-  | char == '*'            = ( char, stateList !! 9 )
-  | char == '^'            = ( char, stateList !! 10)
-  | char == '('            = ( char, stateList !! 11)
-  | char == ')'            = ( char, stateList !! 12)
-  | otherwise              = ( char, last stateList )
+getToken :: Char -> Int -> [Char] -> [Char]
+getToken char state token
+  | next > 100             = token
+  | otherwise              = token ++ [char]
+  where
+    next = nextState state char
+
+calcStates :: [Char] -> [Int]
+calcStates chars = states ++ [nextState (last states) ' ']
+  where states = (tail . tail$ scanl (\state char -> if state < 100 then nextState state char else nextState 0 char) 0 chars)
+--se sobreescriben tokens como = y +
+
+nextState :: Int -> Char -> Int
+nextState state char
+  | char == ' '            = head stateList 
+  | char `elem` ['a'..'z'] = stateList !! 1 
+  | char `elem` ['A'..'Z'] = stateList !! 2 
+  | char == '_'            = stateList !! 3 
+  | char `elem` ['0'..'9'] = stateList !! 4 
+  | char == '='            = stateList !! 5 
+  | char == '+'            = stateList !! 6 
+  | char == '-'            = stateList !! 7 
+  | char == '/'            = stateList !! 8 
+  | char == '*'            = stateList !! 9 
+  | char == '^'            = stateList !! 10
+  | char == '('            = stateList !! 11
+  | char == ')'            = stateList !! 12
+  | otherwise              = last stateList 
   where e = 999
         stateMatrix = [
          {- space     [a..z]   [A..Z]    _     [0..9]     =    +     -     /     *    ^   (     )     else-}
