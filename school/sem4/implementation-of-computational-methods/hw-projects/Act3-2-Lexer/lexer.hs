@@ -1,17 +1,20 @@
-{-# LANGUAGE OverloadedStrings #-}
-import System.IO
-import Data.Char
+import System.IO ( stdout, hFlush )
+import System.Exit ( die )
+import Data.Char ()
 
 main = do
   putStrLn "Ingrese el nombre del archivo"
   hFlush stdout
   file <- getLine
   contents <- readFile file
+  if 999 `notElem`concatMap ( statesHelper 0 ) (lines contents)
+    then putStrLn "Archivo leido correctamente"
+    else die "Se encontraron palabras no reconocidas en el archivo introducido"
   let lexed = "Tipo                    Token\n\n": lexer (lines contents)
   putStr $ concat lexed
 
 lexer :: [[Char]] -> [[Char]]
-lexer = map lexLine 
+lexer = map lexLine
 
 lexLine :: [Char] -> [Char]
 lexLine = tokenToText . tokens
@@ -30,18 +33,21 @@ getTokens :: [Char] ->  [[Char]]
 getTokens text = split (addDelimiters text (getStates text)) '~'
 
 getStates :: [Char] ->[Int]
-getStates text = init $ removeOne $ statesHelper 0 ( text ++ " " )
+getStates text = removeOne $ statesHelper 0 ( text ++ " " )
 
 statesHelper :: Int -> [Char] -> [Int]
 statesHelper _ [] = []
+statesHelper 6 [x] = [106]
 statesHelper prevState (x:chars) =
   let
-  current = if prevState < 100 then nextState prevState x else nextState 0 x
-  in if current < 100 && current /= 999
+  current
+    | prevState < 100 = nextState prevState x
+    | otherwise       = nextState 0 x
+  in if current < 100
   then current: statesHelper current chars
   else if current /= 999
   then current:nextState 0 x: statesHelper (nextState 0 x) chars
-  else  current:statesHelper 0 (tail chars)
+  else  current: statesHelper (nextState 0 x) chars
 
 tokenToText :: [([Char],Int)] -> [Char]
 tokenToText = tokenTextHelper
@@ -66,7 +72,7 @@ tokenTextHelper ((token,state):xs)
 addDelimiters :: [Char] -> [Int] ->  [Char]
 addDelimiters [] _ = []
 addDelimiters _ [] = []
-addDelimiters (c:[]) _ = [c]
+addDelimiters [c] _ = [c]
 addDelimiters (c:xc) (s:xs) = if s > 100 then c:'~':addDelimiters xc xs else c:addDelimiters xc xs
 
 split :: String -> Char -> [String]
@@ -79,7 +85,8 @@ split (c:cs) delim
 
 removeOne :: [Int] -> [Int]
 removeOne [] = []
-removeOne (n1:n2:[]) = if n2 > 100 && n2 /= 999 then n2:[] else n1:n2:[]
+removeOne [n1] = []
+removeOne [n1, n2] = if n2 > 100 && n2 /= 999 then [n2] else [n1, n2]
 removeOne (n1:n2:xs)
   | n2 < 100               = n1:removeOne (n2:xs)
   | n2 == 999              = n1:removeOne (n2:xs)
@@ -102,13 +109,13 @@ nextState state char
   | char == '('            = stateList !! 11
   | char == ')'            = stateList !! 12
   | char == '.'            = stateList !! 14
- 
-  | otherwise              = last stateList
+
+  | otherwise              = stateList !! 15
   where e = 999
         stateMatrix = [
          {- space     [a..z]   [A..Z]    _     [0..9]     =    +     -     /     *    ^   (     )     E/e  .  else-}
    {- 0 -} [   0,       1,       1,      e,      11,      2,   3,    4,    5,    7,   8,  9,    10,   8,   e, e    ],
-   {- 1 -} [   101,     1,       1,      1,      1] ++ repeat 101,
+   {- 1 -} [   101,     1,       1,      1,      1,      101,  101,  101,  101,  101, 101,101, 101,   1] ++ repeat 101,
    {- 2 -} repeat 102,
    {- 3 -} repeat 103,
    {- 4 -} repeat 104,
