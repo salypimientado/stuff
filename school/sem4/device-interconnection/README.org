@@ -61,7 +61,7 @@ Cada capa debe realizar una funcion bien definida
 *** Modelo TCP/IP
 **** Capa
 ***** Aplicacion
-Las capas aplicacion, presentacion y sesion del modelo OSI
+      Las capas aplicacion, presentacion y sesion del modelo OSI
 ****** Aplicacion
       + Protocolos
       + Modelo cliente-servidor
@@ -92,42 +92,42 @@ Las capas aplicacion, presentacion y sesion del modelo OSI
 ***** Red
       Direccionamiento de paquetes con una direccion ip
     + Protocolos
-    - IPv4
-      Protocolo principal
-      Necesita una tabla de direcciones de red
-      32 bits de longitud
-      Los primeros 24 bits representan la direccion de la red
-      Los ultimos 8 representan el host en la red
+    * IPv4
+      - Protocolo principal
+      - Necesita una tabla de direcciones de red
+      - 32 bits de longitud
+      - Los primeros 24 bits representan la direccion de la red
+      - Los ultimos 8 representan el host en la red
     + Clases de IPv4
     A: Redes grandes (0-127)
     B: Redes moderadas (128-191)
     C: Redes chicas (192-223)
     D: Redes multicast (224-239)
     E: Redes experimentales (240-255)
-    - IPv6
-      Protocolo creado despues que se agotara IPv4
-      Aumento de espacio de direcciones
-      Elimina la necesidad de NAT
-      Tiene seguridad integrada
-    - IPvX
-      No garantizan que llegue el paquete
+    * IPv6
+      - Protocolo creado despues que se agotara IPv4
+      - Aumento de espacio de direcciones
+      - Elimina la necesidad de NAT
+      - Tiene seguridad integrada
+    * IPvX
+      - No garantizan que llegue el paquete
     + Mascara de Red
       - Es el prefijo de la red
       - Representa los bits significativos para la red
-        Si una red ocupa los primeros 24 bits:
-        11111111 11111111 11111111 00000000
-        255.255.255.0
+        - Si una red ocupa los primeros 24 bits:
+        - 11111111 11111111 11111111 00000000
+        - 255.255.255.0
     + Subredes
-      - Determinados por bits despues dela mascara de red
-      - El numero de bits determina el numero de subredes posibles
-      - Los bits no utilizados se le agregan a los de la red
-      - La cantidad de hosts depende de la mascara de red
-        Es 2^n -2 donde n es el numero de bits de la porcion del host
-      - Direccion de broadcast
-        Es la ultima direccion posible
-      - Enrutamiento
-      - Enrutadores
-      - Proceso de enrutamiento
+      * Determinados por bits despues dela mascara de red
+      * El numero de bits determina el numero de subredes posibles
+      * Los bits no utilizados se le agregan a los de la red
+      * La cantidad de hosts depende de la mascara de red
+        - Es 2^n -2 donde n es el numero de bits de la porcion del host
+      * Direccion de broadcast
+        - Es la ultima direccion posible
+      * Enrutamiento
+      * Enrutadores
+      * Proceso de enrutamiento
 ***** Enlace
       Se implementa en un adaptador
       - Ethernet
@@ -220,14 +220,14 @@ Las capas aplicacion, presentacion y sesion del modelo OSI
 + Estrella Extendida
 *** VLSM
 *** Vlans en switch
-    vlan x
-    name x
+    - vlan x
+    - name x
 
-    interface y/y
-    switchport access vlan x
+    - interface y/y
+    - switchport access vlan x
 
-    En el gateway
-    switchport mode trunk
+    * En el gateway
+    - switchport mode trunk
 ** Proyecto
 *** Cambios fase 2
     - Poner el servidor de IoT en una vlan extra
@@ -241,11 +241,12 @@ CLOSED: [2021-02-21 Sun 15:52] DEADLINE: <2021-02-19 Fri 22:59>
 **** DONE Entrega 2
      CLOSED: [2021-03-02 Tue 06:18]
 *** Video argumentativo
-    - Red iniciales con modems inalambricos no configurables
-    - Diseño de red (fisico y logico)
-      vlan extra para el servidor de empresa iot
-    - Configuracion
-      cambios:
-      switches y routers acomodados para hacer vlans
-      access points en vez de routers inalambricos 
-      servidores extras en vlans inalambricas para dhcp
+    * Red iniciales con modems inalambricos no configurables
+    * Diseño de red (fisico y logico)
+      - vlan extra para el servidor de empresa iot
+    * Configuracion
+      - cambios:
+      - switches y routers acomodados para hacer vlans
+      - access points en vez de routers inalambricos 
+      - servidores extras en vlans inalambricas para dhcp
+      

@@ -118,16 +118,16 @@
       Las computadoras no corren codigo como tal, en vez corren instrucciones
       del cpu directamente
       + Compilacion
-         Traduce el codigo de alto nivel a machine code que la computadora corre directamente
-         Tiene mas performance
+         - Traduce el codigo de alto nivel a machine code que la computadora corre directamente
+         - Tiene mas performance
       + Interpretacion
-         Lee el codigo y lo corre linea por linea
+         - Lee el codigo y lo corre linea por linea
       + LLVM
-         Se hace un programa intermedio que se corre con un VM chico que permite ser usado en muchos mas dispositivos
+         - Se hace un programa intermedio que se corre con un VM chico que permite ser usado en muchos mas dispositivos
 ***** Abstraccion
 ****** Datos
        La facilidad de un lenguaje para describir y manipular informacion
-       Tipos:
+       * Tipos:
        - Memoria
        - Atomicos
        - Estructurados
@@ -136,22 +136,22 @@
        - Objetos
 ****** Control
        La manera en la que se controla el flujo del programa
-       Tipos:
+       * Tipos:
        - Secuencias, condicionales, jumps
        - Loops
 ****** Modular
-       Tipos:
-       Secuencias de instrucciones con saltos entre memoria
-       Secuencias de instrucciones con saltos a subrutinas
-       Funcional
-       Objetos
+       * Tipos:
+       - Secuencias de instrucciones con saltos entre memoria
+       - Secuencias de instrucciones con saltos a subrutinas
+       - Funcional
+       - Objetos
 ****** Parametros
      + Por referencia
-        Cambia el valor de la variable en la memoria en si
+        - Cambia el valor de la variable en la memoria en si
      + Copia
-        Hace una copia del valor introducido y no se modifica el original
+        - Hace una copia del valor introducido y no se modifica el original
      + Call by need (lazy evaluation)
-        No se evaluan las cosas a menos que sean necesarias
+        - No se evaluan las cosas a menos que sean necesarias
 *** Sesion 3
 **** Programacion Funcional
      + Viene de la combinacion de funciones
@@ -183,43 +183,43 @@
        - Permite que una funcion opere en valores de una familia de tipos en vez de uno solo
 *** Sesion 4
 **** Racket
-     Lenguaje funcional descendiente de LISP
-     Los tipos se determinan en runtime
-     Usa Polish Notation
-     function(x,y) -> (function x y)
+     - Lenguaje funcional descendiente de LISP
+     - Los tipos se determinan en runtime
+     - Usa Polish Notation
+     - function(x,y) -> (function x y)
 ***** Listas
-     '(0 1 2 3 4)
-     (cons 3 '(1 2)) = '(3 1 2)
-     (cons (funcion x) y) '((resultado de funcion x) y)
+     - '(0 1 2 3 4)
+     - (cons 3 '(1 2)) = '(3 1 2)
+     - (cons (funcion x) y) '((resultado de funcion x) y)
 *** Sesion 5
 **** Lenguaje 
-     RAE: Un conjunto de signos y reglas que permiten la comunicaciones
-     Matematicas: Un conjunto de palabras
-     L = {hola, pueblo}
+     - RAE: Un conjunto de signos y reglas que permiten la comunicaciones
+     - Matematicas: Un conjunto de palabras
+     - L = {hola, pueblo}
      + Palabra
-       Sucesion de simbolos de algun alfabeto
-       hola
+       - Sucesion de simbolos de algun alfabeto
+       - hola
      + Alfabeto
-       Conjunto finito no vacio de simbolos
-       A = {a,b,c,...,x,y,z}
+       - Conjunto finito no vacio de simbolos
+       - A = {a,b,c,...,x,y,z}
      + Simbolo
-       Unidad atomica de informacion
+       - Unidad atomica de informacion
 **** Operaciones que aplican en los lenguajes 
      - Operaciones de conjuntos
-     - Concatenacion
-       AB = {ww'| w<- A, w'<- B}
-     - Kleene Star
-       La concatenacion de todas las palabras posibles en un lenguaje
-       Cualquier cosa 0 o mas veces
-       *.exe son todos los archivos que terminan en .exe
-     - Kleene Plus
-       Lo mismo que la Kleene star sin contar el 0
-       Cualquier cosa una o mas veces
+     * Concatenacion
+       - AB = {ww'| w<- A, w'<- B}
+     * Kleene Star
+       - La concatenacion de todas las palabras posibles en un lenguaje
+       - Cualquier cosa 0 o mas veces
+       - *.exe son todos los archivos que terminan en .exe
+     * Kleene Plus
+       - Lo mismo que la Kleene star sin contar el 0
+       - Cualquier cosa una o mas veces
 **** Modelado con automatas
-     Pueden modelar procesos por medio de estados y eventos o transiciones
+     * Pueden modelar procesos por medio de estados y eventos o transiciones
      - Estados: Situaciones por las que el proceso atraviesa
      - Eventos: Acciones instantaneas que provocan cambios en el estado
-     Un autómata finito determinista (AFD) es una quíntupla de la forma
+     - Un autómata finito determinista (AFD) es una quíntupla de la forma
      M = (Q, Σ, δ, q, F)
      Q es un conjunto de estados que es finito,
      Σ es el alfabeto aceptado,
@@ -258,18 +258,18 @@
 *** Sesion 6
 **** AFD
      + Equivalencia
-       Dos automatas son equivalente si aceptan el mismo lenguaje
-       Se prueba con todos los casos del A*
+       - Dos automatas son equivalente si aceptan el mismo lenguaje
+       - Se prueba con todos los casos del A*
      + Arbol de estados incompatibles
-       Se utiliza para checar equivalencia entre dos automatas
-       Se checan todos los caminos, y si alguno no acepta algo que el otro si,
+       - Se utiliza para checar equivalencia entre dos automatas
+       - Se checan todos los caminos, y si alguno no acepta algo que el otro si,
        no son equivalentes
      + Eliminacion de estados equivalentes
-       Esto se hace para simplificar automatas
+       - Esto se hace para simplificar automatas
 ***** Regex
-      \| = OR
-      (0|1)*11: 0 o 1 cero o mas veces, seguido por dos 1s
-      0112111300141011
+      - \| = OR
+      - (0|1)*11: 0 o 1 cero o mas veces, seguido por dos 1s
+      - 0112111300141011
       \* 
 *** Sesion 7
 **** Conversion entre REs y FAs
@@ -289,14 +289,14 @@
      - Gramatica
        La forma en la que las palabras se organizan y combinan
        - Conjunto de reglas
-     Ejemplo: (ES-MX)
-     <frase> -> <sujeto><predicado>
-     <sujeto> -> <sustantivo>
-     <sustantivo> -> Maria
-     <sustantivo> -> Gustavo
-     <predicado> -> <verbo transitivo><objeto>
-     <verbo transitivo> -> abraza
-     <objeto> -> a <sustantivo>
+     * Ejemplo: (ES-MX)
+     - <frase> -> <sujeto><predicado>
+     - <sujeto> -> <sustantivo>
+     - <sustantivo> -> Maria
+     - <sustantivo> -> Gustavo
+     - <predicado> -> <verbo transitivo><objeto>
+     - <verbo transitivo> -> abraza
+     - <objeto> -> a <sustantivo>
 
      Formalmente, una gramatica es un cuadruplo G = (V, Σ, R, S), donde
      1. V es un conjunto finito de variables,
@@ -309,7 +309,7 @@
          L = {w ∈ Σ∗: S =⇒∗ w}
       
 *** Sesion 8
-   
+    
 **** Analisis lexico
      Lee el input y trata de identificar elementos validos para el lenguaje
 
@@ -320,54 +320,55 @@
          
 *** Sesion 9
 **** Context-free languages
-     Reglas = a -> bCd | a -> b | a-> \epsilon
+     - Reglas = a -> bCd | a -> b | a-> \epsilon
 ***** Ejemplo: Matching Parenthesis 
       Ejemplos: (), (()), ()(),(())(),...
 
-      Reglas:
-      S -> (S)
-      S -> \epsilon
-      S -> SS
+      * Reglas:
+      - S -> (S)
+      - S -> \epsilon
+      - S -> SS
       
 ***** Ejemplo: expresiones aritmeticas
       Ejemplo: 25+3*12
 
-      Reglas:
-      E -> E + T
-      E -> T
-      T -> T * F
-      T ->F
-      F -> CF
-      F -> C
-      C -> 0|1|2|3|4|5|6|7|8|9
+      * Reglas:
+      - E -> E + T
+      - E -> T
+      - T -> T * F
+      - T ->F
+      - F -> CF
+      - F -> C
+      - C -> 0|1|2|3|4|5|6|7|8|9
 
 ***** Ejemplo: Palindromos
       Ejemplos: a,aba,babab,aabaa,abba,baab,...
 
-      Reglas:
-      S -> aSa
-      S -> bSb
-      S -> a
-      S -> b
-      S -> \epsilon
+      * Reglas:
+      - S -> aSa
+      - S -> bSb
+      - S -> a
+      - S -> b
+      - S -> \epsilon
      
 *** Sesion 10
    
 **** Automata de pila 
      Forma de representar un lenguaje libre de contexto
 
-     Es una tupla de la forma M = (Q,\sigma,\gamma,\delta,q,F)
+     * Es una tupla de la forma M = (Q,\sigma,\gamma,\delta,q,F)
      donde:
-     Q es un conjunto finito de estados
-     \sigma es el alfabeto de la cinta (sin incluir cuadrado)1
-     \gamma es el alfabeto de la pila (incluyendo $)
-     q elem Q es el estado inicial
-     f subset Q es un conjunto finito de estados finales
-     \delta es la funcion de transicion
+     - Q es un conjunto finito de estados
+     - \sigma es el alfabeto de la cinta (sin incluir cuadrado)1
+     - \gamma es el alfabeto de la pila (incluyendo $)
+     - q elem Q es el estado inicial
+     - f subset Q es un conjunto finito de estados finales
+     - \delta es la funcion de transicion
      
-     La funcion de transicion d es una funcion de la forma:
-     δ : Q × (Σ ∪ {}) × Γ → Q × {N, R} × Γ∗
+     * La funcion de transicion d es una funcion de la forma:
+     - δ : Q × (Σ ∪ {}) × Γ → Q × {N, R} × Γ∗
 
-     Delta se representa de la siguiente manera:
+     * Delta se representa de la siguiente manera:
 
-     ((q0,a,$),(q0,R,x 
+     - ((q0,a,$),(q0,R,x 
+     

@@ -39,8 +39,8 @@
        * Se puede poner add . para trackear todos los archivos y archivos en carpetas en la carpeta actual
      - commit: Crea un punto en el tiempo con los archivos trackeados
        * Argumentos:
-         -a hace que se haga commit de todos los archivos trackeados que cambiaron
-         -m "mensaje" hace un commit con el mensaje dado
+         - -a hace que se haga commit de todos los archivos trackeados que cambiaron
+         - -m "mensaje" hace un commit con el mensaje dado
      - fetch: Saca la informacion del repositorio remoto asignado
      - merge: Junta dos branches y los cambios entre ellas
      - pull: Saca la informacion del repositorio remoto y hace merge con la branch actual
@@ -66,17 +66,17 @@
    
 **** Marco de trabajo o metodos agiles 
      - SCRUM
-       marco de trabajo dentro del cual se pueden atender problemas complejos,
+       * marco de trabajo dentro del cual se pueden atender problemas complejos,
        proponiendo soluciones creativas y productivas con el fin de entregar productos
        del mayor valor posible.
 
      - Programacion Extrema
-       Participacion del cliente en el equipo de desarrollo hasta llegar a tener
+       * Participacion del cliente en el equipo de desarrollo hasta llegar a tener
        retroalimentacion del cliente de forma diaria, pruebas sistematicas y los
        programadores trabajan en parejas.
 
      - Kanban:
-       Un tablero que permite ver de forma rapida las actividades que quedan por hacer,
+       * Un tablero que permite ver de forma rapida las actividades que quedan por hacer,
        en proceso y terminadas.
 
 **** Modelos de desarrollo
@@ -90,7 +90,7 @@
       
 ***** Scrum
         Conformado por sprints con las etapas del modelo cascada
-        Definiciones:
+        - Definiciones:
         * Evento:        Sesiones de trabajo con un objetivo especifico en la produccion de
                          resultados tangibles de valor
         * Artefactos:    Cualquier subproceso de trabajo de equipo agil, como documentos,
