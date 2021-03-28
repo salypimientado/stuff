@@ -1,0 +1,251 @@
+#+STARTUP: hidestars
+
+* Interconexión de dispositivos
+** Clases
+  [[https://itesm.zoom.us/j/2388203098][6AM]]
+*** Clase 06:00
+**** Sesion 2
+     -Router:
+       + Permiten la interconexion de redes
+       + Permiten que computadoras se conecten
+       + Posee un protocolo de enrutamiento
+       + Dual: 2.4G/5G
+    -Switch:
+       + Permiten las conexiones fisicas
+       + Pueden almacenar y aprender direcciones de red
+       + Capaces de filtrado y enrutamiento
+    -Firewall:
+       + Impide conexiones no permitidas y permite las autorizadas
+       + Cuenta con capacidad de reglas y criterios de filtrado
+    -Ruta:
+       + Secuencia de enlaces de comunicaciones que atraviesa un paquete para llegar a donde debe
+    -Aplicaciones distribuidas:
+       + Aplicaciones que requieren varios hosts que intercambian datos entre si
+       + Proporcionan un API
+       + Protocolo: Estandar de comunicaciones
+**** Clase sabado 20 feb
+     Red 192.27.3.0
+     IP: 11000000.00011011.00000011.00000000
+     SM: 11111111.11111111.11111111.11110000
+     # Maximo de redes = 16
+     R0: 11000000.00011011.00000011.00000000 = 192.27.3.0
+     R1: 11000000.00011011.00000011.00010000 = 192.27.3.16
+     R2: 11000000.00011011.00000011.00100000 = 192.27.3.32
+     R3: 11000000.00011011.00000011.00110000 = 192.27.3.48
+     R4: 11000000.00011011.00000011.01000000 = 192.27.3.64
+     R5: 11000000.00011011.00000011.01010000 = 192.27.3.80
+     R6: 11000000.00011011.00000011.01100000 = 192.27.3.96
+     R7: 11000000.00011011.00000011.01110000 = 192.27.3.112
+     R8: 11000000.00011011.00000011.10000000 = 192.27.3.128
+     R9: 11000000.00011011.00000011.10010000 = 192.27.3.144
+**** DONE Curso packet tracer
+CLOSED: [2021-02-15 Mon 06:05]
+** Temas
+*** Modelo OSI
+- Propuesto por la ISO en 1977 y aprobado en 1984
+**** Niveles
+Cada capa debe realizar una funcion bien definida
+***** Aplicacion
++ User-friendly
+***** Presentacion
++ Se encarga de que los datos sean legibles por la computadoras
+***** Sesion
+
+***** Transporte
++ Donde se agregan encabezados y se elige entre seguridad o rapidez
+***** Red
++
+***** Enlace de datos
+***** Fisico
++ Bits
+*** Modelo TCP/IP
+**** Capa
+***** Aplicacion
+Las capas aplicacion, presentacion y sesion del modelo OSI
+****** Aplicacion
+      + Protocolos
+      + Modelo cliente-servidor
+        - Centralizados
+      + Modelo P2P
+        - Escalables
+        - Decentralizados
+      + DNS
+        Convierten dominios a una direccion IP
+      + DHCP
+      + Cookies
+      + TFTP
+      + Protocolo simple para mandar archivos
+      + Bootstrap protocol
+***** Transporte
++ TCP:
+   - Mas seguridad
+   - Si las cosas vienen desordenadas los rechaza y pide que las manden de nuevo
+   - Tiene 20 bytes de encabezado como baseline
+   - Puede mandar hasta 1500 bytes por paquete
+   + UDP:
+    - 32 bits
+    - Todo lo posible por mandar el paquete sin garantias
+    - Puertos de origen/destino
+    - No handshake
+    - Checksum: Suma el contenido del segmento y luego invierte los bits para ver si el mensaje llego bien
+    - Largo: Longitud del paquete
+***** Red
+      Direccionamiento de paquetes con una direccion ip
+    + Protocolos
+    - IPv4
+      Protocolo principal
+      Necesita una tabla de direcciones de red
+      32 bits de longitud
+      Los primeros 24 bits representan la direccion de la red
+      Los ultimos 8 representan el host en la red
+    + Clases de IPv4
+    A: Redes grandes (0-127)
+    B: Redes moderadas (128-191)
+    C: Redes chicas (192-223)
+    D: Redes multicast (224-239)
+    E: Redes experimentales (240-255)
+    - IPv6
+      Protocolo creado despues que se agotara IPv4
+      Aumento de espacio de direcciones
+      Elimina la necesidad de NAT
+      Tiene seguridad integrada
+    - IPvX
+      No garantizan que llegue el paquete
+    + Mascara de Red
+      - Es el prefijo de la red
+      - Representa los bits significativos para la red
+        Si una red ocupa los primeros 24 bits:
+        11111111 11111111 11111111 00000000
+        255.255.255.0
+    + Subredes
+      - Determinados por bits despues dela mascara de red
+      - El numero de bits determina el numero de subredes posibles
+      - Los bits no utilizados se le agregan a los de la red
+      - La cantidad de hosts depende de la mascara de red
+        Es 2^n -2 donde n es el numero de bits de la porcion del host
+      - Direccion de broadcast
+        Es la ultima direccion posible
+      - Enrutamiento
+      - Enrutadores
+      - Proceso de enrutamiento
+***** Enlace
+      Se implementa en un adaptador
+      - Ethernet
+      - PCMCI
+      - 802.11
+      Tipo de dato: Trama
+      + Construccion de tramas
+      + Acceso al medio
+        - MAC Address
+        - Especifica las reglas de como transmitir las tramas sobre el enlace
+      + Entrega confiable entre nodos adyacentes
+        - Garantiza que los datagramas atraviesen el enlace sin error 
+      + Control de flujo
+        - Cada lado del enlace tiene un limite de almacenamiento
+      + Deteccion de errores
+        - Errores causados por atenuacion o ruido
+        - Si se detectan errores se pide retransmision
+      + Correccion de errores
+        - El receptor recibe y corrige errores sin solicitar retransmision
+      + Half-duplex y full-duplex
+        - Full duplex: Los dos nodos pueden transmitir al mismo tiempo
+****** Metodos de deteccion de errores 
+       + Bit de paridad
+         Se checa la paridad en un grupo de bits y si no concuerda con la paridad de los datos el paquete viene corrupto
+         Se pueden checar varios grupos de bits para correccion de errores
+       + Checksum
+         Se suman los bytes y se le hace el complemento a uno al numero y
+         se suma con el otro checksum
+       + Verificacion de redundancia ciclica
+         Se realiza una serie de pasos matematicos con un polinomio a la trama
+****** Categorias de protocolos de acceso multiple
+******* Protocolos de canal subdividido
+        + TDMA
+          Por rondas
+******* Accion Aleatoria
+        + ALOHA puro
+          Se manda inmediatamente
+          No hay sincronizacion
+          Probabilidad de exito de transmision: 18%
+        + ALOHA ranurado
+          El tiempo es dividido en ranuras
+          Los nodos estan sincronizados
+          Se mandan al inicio de cada ranura de tiempo
+          Probabilidad de exito: 37%
+        + CSMA
+          Checa si el canal esta disponible para hacer la transmision
+          Si no, el nodo espera un tiempo aleatorio para volver a checar el canal
+        + CSMA/CD
+          Las colisiones son detectadas en esta version
+          Las transmisiones que colisionan son abortadas
+          Facil de implementar en LANs cableadas:
+            Se mide la potencia mandada y recibida y si discrepan hay colision
+          Dificil en wifi:
+            El receptor se apaga mientras se transmite, dificultando esto
+        + Polling Protocol
+***** Fisica
+****** Tipos de cable de red 
+       + Coaxial
+         - Materiales: Niquel, Oro, PPE
+         - Fiabilidad de transmision: Moderada-alta
+         - Ancho de banda: Moderado-alto
+         - Seguridad: Baja a moderada
+         - Costo: Moderado-caro
+         - Conector: BNC
+          
+       + Par trenzado (UTP, STP)
+         - Materiales: Cobre
+         - Fiabilidad de transmision: Bajo-moderado
+         - Ancho de banda: Bajo-alto
+         - Seguridad: Baja-moderada
+         - Costo: Bajo-moderado
+         - Conector: Rj-45
+           
+       + Fibra optica
+         - Materiales: Silica
+         - Fiabilidad de transmision: Alta
+         - Ancho de banda: Muy alto
+         - Seguridad: Alta
+         - Costo: Alto
+         - Conector: SC
+         - Interferencia: Ninguna
+           
+*** Topologias
++ Fisica
++ Digital
+**** Formas
++ Punto a Punto
++ Estrella/ Hub & Spoke
++ De Arbol
++ Estrella Extendida
+*** VLSM
+*** Vlans en switch
+    vlan x
+    name x
+
+    interface y/y
+    switchport access vlan x
+
+    En el gateway
+    switchport mode trunk
+** Proyecto
+*** Cambios fase 2
+    - Poner el servidor de IoT en una vlan extra
+      
+** Tareas
+*** DONE Bellman-ford implementado
+    CLOSED: [2021-02-28 Sun 18:51]
+*** Proyecto
+**** DONE Entrega 1
+CLOSED: [2021-02-21 Sun 15:52] DEADLINE: <2021-02-19 Fri 22:59>
+**** DONE Entrega 2
+     CLOSED: [2021-03-02 Tue 06:18]
+*** Video argumentativo
+    - Red iniciales con modems inalambricos no configurables
+    - Diseño de red (fisico y logico)
+      vlan extra para el servidor de empresa iot
+    - Configuracion
+      cambios:
+      switches y routers acomodados para hacer vlans
+      access points en vez de routers inalambricos 
+      servidores extras en vlans inalambricas para dhcp

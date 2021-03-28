@@ -1,0 +1,177 @@
+#+STARTUP: hidestars
+
+* Construccion de software y toma de decisiones
+  
+** Web development
+*** HTML
+    Hyper Text Markup Language
+
+    Tags = 
+    Se pone el documento entero en un tag de html
+
+    Tag:
+    Contiene informacion y otros tags adentro
+    - Deben cerrarse
+    <tag> content </tag>
+    
+**** Head
+     Meta tags
+     Title
+**** Body
+     En si el cuerpo de la pagina
+     Tags:
+     - <p> Parrafo
+     - <div> Division
+     - <span> Span
+
+     Atributos:
+     - id
+       Mas que nada para acceder al elemento
+     - class
+       Para acceder a un grupo de elementos y ponerles css
+*** Git
+    Sistema de control de versiones
+    Se basa en un grafo aciclico dirigido
+    
+**** Comandos 
+     - init: Inicializa un repositorio
+     - add <archivo>: Hace que git tome en cuenta el archivo
+       * Se puede poner add . para trackear todos los archivos y archivos en carpetas en la carpeta actual
+     - commit: Crea un punto en el tiempo con los archivos trackeados
+       * Argumentos:
+         -a hace que se haga commit de todos los archivos trackeados que cambiaron
+         -m "mensaje" hace un commit con el mensaje dado
+     - fetch: Saca la informacion del repositorio remoto asignado
+     - merge: Junta dos branches y los cambios entre ellas
+     - pull: Saca la informacion del repositorio remoto y hace merge con la branch actual
+
+
+     Servicios de hosting de repositorios:
+     - Github
+     - Bitbucket
+       
+       
+*** CSS
+** Bases de datos
+*** Metodogias agiles 
+    Forma de implementar proyectos basada en iteraciones minimas funcionales
+    con el objetivo de aumentar la colaboracion con el cliente para ofrecer
+    lo que se desea de una mejor manera.
+
+    12 principios de agilidad
+    1. Aceptamos que los requisitos cambien, incluso en etapas tardias del desarrollo
+       Los procesos agiles aprovechan el camio para proporcionar ventaja competitiva
+       al cliente
+
+   
+**** Marco de trabajo o metodos agiles 
+     - SCRUM
+       marco de trabajo dentro del cual se pueden atender problemas complejos,
+       proponiendo soluciones creativas y productivas con el fin de entregar productos
+       del mayor valor posible.
+
+     - Programacion Extrema
+       Participacion del cliente en el equipo de desarrollo hasta llegar a tener
+       retroalimentacion del cliente de forma diaria, pruebas sistematicas y los
+       programadores trabajan en parejas.
+
+     - Kanban:
+       Un tablero que permite ver de forma rapida las actividades que quedan por hacer,
+       en proceso y terminadas.
+
+**** Modelos de desarrollo
+***** Cascada
+        Tiene fases definidas:
+        1. Requerimiento
+        2. Diseño
+        3. Desarrollo
+        4. Pruebas
+        5. Ejecucion y mantenimiento
+      
+***** Scrum
+        Conformado por sprints con las etapas del modelo cascada
+        Definiciones:
+        * Evento:        Sesiones de trabajo con un objetivo especifico en la produccion de
+                         resultados tangibles de valor
+        * Artefactos:    Cualquier subproceso de trabajo de equipo agil, como documentos,
+                         procesos, reglas de negocios, software, etc...
+        * Valor:         Todo lo que resuelve algun punto de dolor o facilita algun trabajo
+                         al cliente
+        * Producto:      Entregable final que se construye para el cliente
+        * Backlog:       Acumulacion de caracteristicas y tareas que se requieren para que
+                         el producto pueda ser de valor para el cliente
+                         
+        Eventos en un Sprint:
+        * Planeacion:    Define el objetivo del sprint, seleccionando cantidad de historias a
+                         realizar, por cada una se detalla sus tareas y estimacion de esfuerzo
+        * Desarrollo:    Etapa donde los elementos del equipo trabajan para desarrollar las
+                         historias
+        * Sesion Diaria: Sesion rapida del equipo de desarrollo donde se hace un analisis corto
+                         del estado de la historia en desarrollo
+        * Revision:      El equipo presenta las historias que se aceptaron en la planeacion
+        * Retrospectiva: Sesion de retroalimentacion para identificar lo que se hizo bien, las
+                         areas de oportunidad y lo que se necesita hacer para mejorar
+        * Refinamiento:  Sesion para detallar nuevas historias para los proximos sprints
+          
+     
+**** Roles
+    
+***** Principales 
+      Product Owner:
+      * Establece los objetivos del proyecto
+      * Define las historias, requerimientos y criterios de aceptacion del producto
+      * Representa los intereses de la organizacion y clientes
+      * Interlocutor unico ante el equipo
+      
+      Scrum Master:
+      * Apoya el marco de trabajo y eventos
+      * Fortalece la comunicacion entre el equipo
+      * Mantiene al equipo enfocado
+      * Elimina impedimento para el progreso del equipo de desarrollo
+      
+      Dev Team:
+      * Equipo auto organizado y multifuncional
+      * Tiempo completo al proyecto
+      * Desarrollan el producto
+      * Multidisciplinario
+      
+***** Otros
+      Stakeholders: Persona o organizacion que provee recursos y apoyo al proyecto
+      
+      Chief Product Owner: Responsable de coordinar multiples product owners
+      
+      Cliente: Persona o organizacion que adquiere el producto o servicio
+      
+      Usuario: Individuo u organizacion que usa el producto o servicio
+      
+** Reto
+*** Reunion CEMEX
+    Objetivo:
+    - Desarrollar una prueba de concepto de gamificacion a traves
+    de un simulador que utilice datos reales sanitizados.
+
+    Descripcion del proyecto:
+    - Generar un modelo gamificado que represente las principales actividades
+      que contribuyen a la velocidad y calidad de los equipos de desarrollo
+    - Simular la ejecucion de los diferentes juegos diseñados utilizando la
+      linea de tiempo de los datos provistos
+    - Evaluar el beneficio de implementar el modelo en un ambiente productivo
+
+    KPI
+    - Key performance indicator
+    - Utilizado para sintetizar informacion sobre eficacia y productividad
+
+    Lead Indicators
+    - Tratan de predecir el futuro
+     
+***** Porque gamificacion 
+     Ayuda a mejorar los siguientes aspectos:
+     - Alta complejidad en terminos de tareas y sus dependencias
+     - A pesar de tener tableros, es relativamente facil perder visibilidad
+       de lo importante por parte de los miembros del equipo
+     - Baja motivacion del equipo a seguir politicas y lineamientos, esto
+       trae como consecuencias fallas en la calidad y por ende en la velocidad
+
+       
+** Actividades
+*** TODO Act 2.1.1

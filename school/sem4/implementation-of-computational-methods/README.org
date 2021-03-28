@@ -1,0 +1,373 @@
+#+STARTUP: hidestars
+
+* Implementación de métodos computacionales
+** Tareas
+*** DONE Tarea 1
+    CLOSED: [2021-02-21 Sun 15:52] DEADLINE: <2021-02-10 Wed 23:00>
+*** DONE Lexer
+    CLOSED: [2021-03-28 Sun 00:58]
+    Check if current fulfills previous state
+** Clases
+  [[https://itesm.zoom.us/j/2343618041][Link]]
+*** Sesion 1
+**** Conjuntos
+***** Definicion
+     + Coleccion de elementos.
+     + Mayusculas para describirlos y minusculas para sus elementos.
+     + Se definen por enumeracion o descripcion.
+***** Notacion
+     + Pertenencia: a ∈ A, cuando a es un elemento de A.
+     + Cardinalidad: |A| representa el número de elementos en A.
+     + Inclusion: A ⊆ B si todos los elementos de A son elementos de B.
+     + Igualdad: Si A ⊆ B y B ⊆ A, entonces A = B.
+     + Inclusion propia: A ⊂ B si todos los elementos de A son elementos de B y A != B.
+     + Conjunto vacio: ∅ o {} para representar un conjunto sin elementos.
+***** Operaciones
+    + Union: Todos los que se encuentran en A y  todos los que se encuentran en B.
+      - Conmutativa
+      - Asociativa
+      - Distributiva
+      - Ley de DeMorgan
+    + Interseccion: Todos los elementos que se encuentran en A y B al mismo tiempo.
+      - Conmutativa
+      - Asociativa
+      - Distributiva
+      - Ley de DeMorgan
+    + Resta: Todos los elementos que se encuentran en A y no en B.
+    + Complemento: Todos los elementos que no se encuentran en A.
+    + Producto Cartesiano: A × B = {(x, y) : x ∈ A, y ∈ B}
+      - Ejemplo: A = {1, 2, 3} B = {1, 2}
+    A × B = {(1, 1),(1, 2),(2, 1),(2, 2),(3, 1),(3, 2)}
+    + Conjunto potencia: El conjunto de todos los subconjuntos de A
+      - Denotado por denotado por o ℘(A)
+    ℘({a, b, c}) = {∅, {a}, {b}, {c}, {a, b}, {a, c}, {b, c}, {a, b, c}}
+      - |P(A)| = 2^{|A|}
+**** Relaciones
+***** Relaciones binarias
+    + Relaciones reflexivas
+      Se dice que es reflexiva sobre un conjunto A si y solo si (a, a) ∈ R para todo a ∈ A.
+    + Relaciones transitivas
+      Decimos que R es transitiva si y sólo si cuando (a, b) ∈ R y (b, c) ∈ R, entonces (a, c) ∈ R.
+    + Relaciones simetricas
+      Una relación R es simétrica si y sólo si cuando (a, b) ∈ R, entonces (b, a) ∈ R.
+***** Funcion
+    + Una función unitaria de un conjunto A en un conjunto B es cualquier relación binaria R
+      de A a B que satisfaga la condición de que para todo a ∈ A existe exactamente un b ∈ B tal que (a, b) ∈ R.
+    + Dominio: A
+    + Rango: B
+    + Imagen: Conjunto de B que se utilizan en la funcion
+    + Funcion inyectiva: Se dice que f es inyectiva (o uno a uno) si y sólo si cuando a != a', entonces f(a) != f(a').
+    + Funcion sobreyectiva: imagen(f) = B.
+    + Funcion biyectiva: inyectiva y sobreyectiva
+***** Conjuntos Infinitos
+****** Naturales
+     Contable
+****** Enteros
+     Biyectivo
+****** Racionales
+     Biyectivo
+****** Irracionales
+     Infinito no contable
+****** Reales
+     Infinito no contable
+**** Logica
+     + OR
+     + AND
+     + NOT
+     Implicacion
+     | A | B | C |
+     |---+---+---|
+     | T | T | T |
+     | T | F | F |
+     | F | T | T |
+     | F | F | T |
+*** Sesion 2
+**** Lenguaje de programacion
+   + Lenguajes formales para comunicar informacion a una computadora
+     - Formal: que es matematicamente comprobable
+   + Hay muchos por varias razones:
+     - Es una ciencia relativamente nueva
+     - Hay varios que son para cosas especificas
+     - Preferencia personal
+***** Lo que hace un lenguaje bueno
+    - Poder expresivo (features)
+    - Learning curve
+    - Facilidad de implementacion
+    - Open source
+    - Buenos compiladores/interpretadores
+    - Patrocinio bueno
+***** Clasificacion de lenguajes
+****** Tipo de instrucciones
+     - Declarativos: Le dicen a la computadora lo que tiene que hacer
+       Ejemplos: Prolog
+     - Imperativos: Le dicen a la computadora como tiene que hacer lo que tiene que hacer
+       Ejemplos: C++, python, etc.
+****** Paradigma
+     - Declarativos
+     - Estructurados
+     - Orientados a objetos
+     - Funcionales
+****** Niveles de abstraccion
+     - Low level: Muy cerca al hardware
+       Ejemplos: Assembly, machine code
+     - High level: Mas abstractos, usan lenguaje mas natural
+       Ejemplos: C++, Java
+     - Very high level: Lo mas abstracto que se puede, muy especificos en usos
+       Ejemplos: Python, Matlab
+***** Proceso de traduccion
+      Las computadoras no corren codigo como tal, en vez corren instrucciones
+      del cpu directamente
+      + Compilacion
+         Traduce el codigo de alto nivel a machine code que la computadora corre directamente
+         Tiene mas performance
+      + Interpretacion
+         Lee el codigo y lo corre linea por linea
+      + LLVM
+         Se hace un programa intermedio que se corre con un VM chico que permite ser usado en muchos mas dispositivos
+***** Abstraccion
+****** Datos
+       La facilidad de un lenguaje para describir y manipular informacion
+       Tipos:
+       - Memoria
+       - Atomicos
+       - Estructurados
+       - Definidos por el usuario
+       - Abstractos
+       - Objetos
+****** Control
+       La manera en la que se controla el flujo del programa
+       Tipos:
+       - Secuencias, condicionales, jumps
+       - Loops
+****** Modular
+       Tipos:
+       Secuencias de instrucciones con saltos entre memoria
+       Secuencias de instrucciones con saltos a subrutinas
+       Funcional
+       Objetos
+****** Parametros
+     + Por referencia
+        Cambia el valor de la variable en la memoria en si
+     + Copia
+        Hace una copia del valor introducido y no se modifica el original
+     + Call by need (lazy evaluation)
+        No se evaluan las cosas a menos que sean necesarias
+*** Sesion 3
+**** Programacion Funcional
+     + Viene de la combinacion de funciones
+     + Nivel de abstraccion muy alto
+     + Define el output de un programa como una funcion matematica de los inputs
+     + La computacion se hace reescribiendo las funciones y no modificando estados
+     + El programa completo es basado en funciones
+***** Ventajas
+     + No usa variables locales
+     + No usa asignaciones
+     + La ejecucion se controla completamente por recursion y decisiones
+     + Los programas funcionales son usualmente faciles de leer y mantener.
+***** Desventajas
+     + Dificil de aprender por la diferencia en estilo de programacion
+     + Suelen tener peor performance
+***** Funciones
+     + Relacion en la que cada x da un y, y cada x tiene un unico y
+***** Functores
+     + Un concepto similar a una funcion a la que le puedes meter cualquier valor
+***** Conceptos principales
+     + Expresiones
+       - Algo que tiene que ser evaluado
+     + Funciones
+       - Pueden ser pasadas como argumentos o computadas como resultado de otras funciones
+       - Una funcion de grado alto regresa otras funciones
+     + Expresiones lambda
+       - Funciones sin nombre que se utilizan como transformaciones.
+     + Polimorfismo parametrico
+       - Permite que una funcion opere en valores de una familia de tipos en vez de uno solo
+*** Sesion 4
+**** Racket
+     Lenguaje funcional descendiente de LISP
+     Los tipos se determinan en runtime
+     Usa Polish Notation
+     function(x,y) -> (function x y)
+***** Listas
+     '(0 1 2 3 4)
+     (cons 3 '(1 2)) = '(3 1 2)
+     (cons (funcion x) y) '((resultado de funcion x) y)
+*** Sesion 5
+**** Lenguaje 
+     RAE: Un conjunto de signos y reglas que permiten la comunicaciones
+     Matematicas: Un conjunto de palabras
+     L = {hola, pueblo}
+     + Palabra
+       Sucesion de simbolos de algun alfabeto
+       hola
+     + Alfabeto
+       Conjunto finito no vacio de simbolos
+       A = {a,b,c,...,x,y,z}
+     + Simbolo
+       Unidad atomica de informacion
+**** Operaciones que aplican en los lenguajes 
+     - Operaciones de conjuntos
+     - Concatenacion
+       AB = {ww'| w<- A, w'<- B}
+     - Kleene Star
+       La concatenacion de todas las palabras posibles en un lenguaje
+       Cualquier cosa 0 o mas veces
+       *.exe son todos los archivos que terminan en .exe
+     - Kleene Plus
+       Lo mismo que la Kleene star sin contar el 0
+       Cualquier cosa una o mas veces
+**** Modelado con automatas
+     Pueden modelar procesos por medio de estados y eventos o transiciones
+     - Estados: Situaciones por las que el proceso atraviesa
+     - Eventos: Acciones instantaneas que provocan cambios en el estado
+     Un autómata finito determinista (AFD) es una quíntupla de la forma
+     M = (Q, Σ, δ, q, F)
+     Q es un conjunto de estados que es finito,
+     Σ es el alfabeto aceptado,
+     δ : Q × Σ → Q es la función de transición,
+     q ∈ Q es el estado inicial,
+     F ⊆ Q es un conjunto de estados finales.
+
+     #+CAPTION: Ejemplo:
+     #+NAME: Ejemplo automata maquina expendedora
+     #+ATTR_ORG: :width 500
+     [[./imgs/Automaton.png]]
+
+     Ejemplo 2:
+     
+     #+CAPTION: Ejemplo:
+     #+NAME: Ejemplo 2
+     #+ATTR_ORG: :width 500
+       [[./imgs/Automaton2.png]]
+     
+     M = {Q, Σ, δ, q, F}
+     Q = {q0,q1,q2}
+     Σ = {a,b}
+     δ = {((q0,a),q2),((q0,b),q1),((q1,a),q1),
+          ((q1,b),q1),((q2,b),q1),((q2,a),q0)}
+     q = q0
+     F = {q0,q2}
+
+     - Los automatas tienen que se correctos y completos
+     - Correcto: Acepta solo las palabras que pertenecen al lenguaje
+     - Completez: Acepta todas las palabras que pertenecen al lenguaje
+
+     - Los estados son mutualmente excluyentes
+     - Se pueden hacer automatas por conjuntos de estados
+     - Igualmente se puede hacer un automata determinista como complemento
+       de otro automata
+*** Sesion 6
+**** AFD
+     + Equivalencia
+       Dos automatas son equivalente si aceptan el mismo lenguaje
+       Se prueba con todos los casos del A*
+     + Arbol de estados incompatibles
+       Se utiliza para checar equivalencia entre dos automatas
+       Se checan todos los caminos, y si alguno no acepta algo que el otro si,
+       no son equivalentes
+     + Eliminacion de estados equivalentes
+       Esto se hace para simplificar automatas
+***** Regex
+      \| = OR
+      (0|1)*11: 0 o 1 cero o mas veces, seguido por dos 1s
+      0112111300141011
+      \* 
+*** Sesion 7
+**** Conversion entre REs y FAs
+***** Razones para esto
+      - Los FAs son mas faciles de entender
+      - Los FAs describen que pasa en cada estado y con cada accion
+      - Las REs son mas compactas
+      - Pasar de una condicion de aceptacion de un problema a n FA puede
+        ser mas complicado
+      - Las REs son muy dificiles de explicar
+***** Pasos
+      1. Se hace un nuevo estado inicial y un nuevo estado final
+      2. Se empieza en el nodo final
+      3. Se van cambiando los los nodos a sus versiones de RE
+         
+**** Gramaticas regulares
+     - Gramatica
+       La forma en la que las palabras se organizan y combinan
+       - Conjunto de reglas
+     Ejemplo: (ES-MX)
+     <frase> -> <sujeto><predicado>
+     <sujeto> -> <sustantivo>
+     <sustantivo> -> Maria
+     <sustantivo> -> Gustavo
+     <predicado> -> <verbo transitivo><objeto>
+     <verbo transitivo> -> abraza
+     <objeto> -> a <sustantivo>
+
+     Formalmente, una gramatica es un cuadruplo G = (V, Σ, R, S), donde
+     1. V es un conjunto finito de variables,
+     2. Σ es un conjunto finito de terminales,
+     3. R es un conjunto finito de reglas de la forma A → w, tal que A ∈ V
+        y w ∈ (V ∪ Σ)∗
+     4. S ∈ V es la variable inicial.
+       
+     Lenguaje L generado por G
+         L = {w ∈ Σ∗: S =⇒∗ w}
+      
+*** Sesion 8
+   
+**** Analisis lexico
+     Lee el input y trata de identificar elementos validos para el lenguaje
+
+     * Quita whitespace, lineas vacias y comentarios
+     * Asigna un token a cada variable
+       - Token: par <tipo,valor>
+       - Se guardan los tokens en una tabla (matriz de transicion)
+         
+*** Sesion 9
+**** Context-free languages
+     Reglas = a -> bCd | a -> b | a-> \epsilon
+***** Ejemplo: Matching Parenthesis 
+      Ejemplos: (), (()), ()(),(())(),...
+
+      Reglas:
+      S -> (S)
+      S -> \epsilon
+      S -> SS
+      
+***** Ejemplo: expresiones aritmeticas
+      Ejemplo: 25+3*12
+
+      Reglas:
+      E -> E + T
+      E -> T
+      T -> T * F
+      T ->F
+      F -> CF
+      F -> C
+      C -> 0|1|2|3|4|5|6|7|8|9
+
+***** Ejemplo: Palindromos
+      Ejemplos: a,aba,babab,aabaa,abba,baab,...
+
+      Reglas:
+      S -> aSa
+      S -> bSb
+      S -> a
+      S -> b
+      S -> \epsilon
+     
+*** Sesion 10
+   
+**** Automata de pila 
+     Forma de representar un lenguaje libre de contexto
+
+     Es una tupla de la forma M = (Q,\sigma,\gamma,\delta,q,F)
+     donde:
+     Q es un conjunto finito de estados
+     \sigma es el alfabeto de la cinta (sin incluir cuadrado)1
+     \gamma es el alfabeto de la pila (incluyendo $)
+     q elem Q es el estado inicial
+     f subset Q es un conjunto finito de estados finales
+     \delta es la funcion de transicion
+     
+     La funcion de transicion d es una funcion de la forma:
+     δ : Q × (Σ ∪ {}) × Γ → Q × {N, R} × Γ∗
+
+     Delta se representa de la siguiente manera:
+
+     ((q0,a,$),(q0,R,x 
