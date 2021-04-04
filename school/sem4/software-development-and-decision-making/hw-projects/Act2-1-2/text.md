@@ -463,3 +463,161 @@ Tipo de dato que da acceso de una variable a un proceso a la vez
 Capitulo 4: Software Testing
 ---------------------------------
 
+Los tests de software son verificaciones en las que el software deberia tener comportamientos esperados con una serie finita de casos de prueba
+
+### Software Testing Fundamentals
+
++ Hay una serie de terminos que se refieren a un error o falla:
+	- Fault (falla)
+	- Failure (fallo)
+	- Error
+	- Otros
++ El termino 'defect' (defecto)  puede referirse a ambos faults y failures
++ Los *failure-causing inputs* pueden ser usado en vez de las faults para reducir ambiguedad
++ El testing sirve para probar que hay errores, pero no para probar que no los hay
+
+### Test Levels
+
+Al hacer testing se suele separar por niveles basados en el objeto que sera sometido a los tests
+
++ El objeto testeado puede ser un modulo o un grupo de modulos y las pruebas se hacen por fases:
+	- **Unit testing**  
+Prueba modulos o componentes solos
+	- **Integration testing**  
+Prueba que las interacciones entre modulos sea correcta
+	- **System testing**  
+Prueba que todo funcione como debe  
+Mas que nada para probar requerimientos no funcionales como velocidad, seguridad, etc.
+
++ Las pruebas se suelen hacer con un objetivo en mente, y  
+Hay varios objetivos que una prueba puede tener:
+	- **Acceptance/Qualification Testing**  
+Checa que un sistema cumpla los criterios de aceptacion
+	- **Installation Testing**  
+Pasa una vez que el software termina la instalacion en el sistema
+	- **Alpha and Beta Testing**  
+En este tipo de pruebas se le da a usuarios el software para que lo usen y reporten problemas
+	- **Reliability Achievement and Evaluation**  
+Se generan casos de prueba random para encontrar errores
+	- **Regression Testing**  
+Se prueban componentes especificos para asegurarse de que modificaciones no han causado que deje de funcionar de manera correcta
+	- **Performance Testing**  
+Aqui se prueba que el software cumpla los requerimientos de performance establecidos
+	- **Security Testing**  
+Se prueba que el software no sea vulnerable a ataques externos
+	- **Stress Testing**  
+Mantiene al sistema en su carga maxima una cantidad de tiempo extendida para ver como reacciona
+	- **Back-To-Back Testing**  
+Corre el programa dos veces con el mismo input para checar si hay discrepancias y se analizan en caso de que si hayan
+	- **Recovery Testing**  
+Analiza como el software se recupera de un fallo mayor
+	- **Interface Testing**  
+Checa que las interfaces funcionen correctamente mandando y recibiendo informacion correcta
+	- **Configuration Testing**  
+Prueba el software con configuraciones diferentes para asegurarse de que funciona de la manera esperada
+	- **Usability and Human Computer Interaction Testing**  
+Evalua que tan facil es el software de aprender y usar
+
+### Test Techniques
+
+Hay varias tecnicas cuyo objetivo principal es detectar la mayor cantidad de errores posibles, y estas intentan romper el programa
+
++ Estas tecnicas se pueden clasificar en dos tipos:
+	- **White-box/glass-box**  
+Si las pruebas estan basadas en como esta hecho el codigo/software
+	- **Black-box**  
+Si las pruebas nada mas dependen del input/output del software
+
+A continuacion estan las tecnicas mas usadas para hacer testing:
++ **Ad hoc**  
+Se basa en el conocimiento y experiencia del ingeniero de software
++ **Exploratory Testing**  
+Se van haciendo pruebas con el tiempo a como el ingeniero lo vea necesario
++ **Equivalence Partitioning**  
+Se hacen conjuntos de inputs que los representan y se seleccionan una serie de estos para validar la area mas grande posible
++ **Pairwise Testing**  
+Se prueban todas las posibles combinaciones con dos parametros reduciendo cosas que pueden incrementar el numero de casos de prueba demasiado
++ **Boundary-Value Analysis**  
+En este los casos de prueba suelen ser limites de algun tipo ya que suelen causar errores la mayoria del tiempo si se pasa del limite
++ **Random Testing**  
+Los casos de prueba se hacen completamente aleatoriamente
++ **Control Flow-Based Criteria**  
+Los casos de prueba deben cubrir todos los caminos del programa
++ **Data Flow-Based Criteria**  
+Se hacen los casos de prueba para probar todo de todas las variables
++ **Fault-Based Techniques**  
+Se ponen casos de prueba que probablemente van a causar problemas
++ **Error Guessing**  
+Casos hechos por los ingenieros de software que creen son las cosas principales que pueden llegar a fallar en su programa y depende del expertis del desarrollador bastante
++ **Mutation Testing**  
+Se generan casos de prueba que comparan el programa base de un modificado un poco para detectar el mutante, y si no se detectan los mutantes se generan casos de prueba que lo hacen
++ **Operational Profile**  
+Se trata de simular el uso cotidiano de un programa para ver que tan confiable es
++ **User Observation Heuristics**  
+Se usan heuristicas para generar casos de prueba cuyo objetivo es determinar que tan facil de usar es el programa
++ **Decision Tables**  
+Se asocian inputs con outputs y se hacen los casos de prueba a partir de esto
++ **Finite-State Machines**  
+Se prueban todos los estados y transiciones del programa representado como un automata
++ **Formal Specifications**  
+Se hacen casos de prueba de forma automatica a partir de los requerimientos definidos en un lenguaje formal
++ **Workflow Models**  
+Se hacen casos de prueba relevantes a ciertas actividades definidas
++ Existen varias formas de combinar tecnicas, deterministicas y aleatorias, funcionales y estructurales, entre otras y esto puede servir bastante ya que se pueden complementar de cierta manera
+
+### Test-Related Measures
+
+Hay varias indicadores que se utilizan para analizar calidad, y en el area de testing para medir progreso se pueden utilizar varias cosas que sirven para optimizar el proceso de testing
++ Hay medidas que se basan en el tamaño del codigo
++ Existen muchos tipos de faults, y saber identificarlas puede ser util al analizar el software que es testeado
++ Hay modelos de confiabilidad de codigo que se basan en las faults que estiman que entre menos fallas hay mas confiable es el programa
++ Hay un metodo llamado fault seeding en el cual se agregan fallos al codigo para encontrar errores adicionales que se encuentran al hacer los tests
++ Se mide el mutation score al hacer Mutation Testing, que es el ratio de mutantes detectados a mutantes generados
+
+### Test Process
+
+Todo lo anterior debe ser integrado a un proceso de testing bien definido
+
++ Se debe dejar de por lado el que alguien hizo el codigo, y enfocarse en arreglar lo que causa problemas
++ El como se va a manejar el proceso de testing deberia ser documentado claramente
++ Se puede tener un equipo de testing separado de los desarrolladores para que no haya bias de algun tipo, o se puede hacer por los mismos desarrolladores
++ Se usan medidas como las que fueron mencionadas en la seccion anterior para mejorar la eficiencia del proceso
++ Se debe tener bien definido el punto en el cual el testing es suficiente, porque si no realmente puede llegar a ser casi infinito
++ El ambiente de testing deberia estar bien integrado con el resto del proyecto
++ Los defectos deberian estar documentados de igual manera
+
+### Software Testing Tools
+
+Ya que el testing es una labor que si se hace de manera manual toma muchisimo tiempo, hay herramientas que hacen esto mucho menos tedioso
+
+Existen multiples herramientas hechas para esto:
++ **Test harnesses**  
+Estos son environments en los que las pruebas son hechas y los resultados son guardados
+
++ **Test generators**  
+Estos generan casos de pruebas basados en tecnicas o mezclas de estas
+
++ **Capture/replay tools**  
+Estas son programas que dejan inspeccionar casos de prueba especificos con mas detalle
+
++ **Oracle/file comparators/assertion checking tools**  
+Checan que un test sea correcto o no
+
++ **Coverage analyzers and instrumenters**  
+Estas herramientas ven que tanto porcentaje del programa se usa y lo comparan con el porcentaje esperado
+
++ **Tracers**  
+Ven que camino tomo el programa en un caso de prueba
+
++ **Regression testing tools**  
+Ejecutan un test suite despues de modificar una seccion de codigo para asegurarse de que no rompio el programa
+
++ **Reliablility evaluation tools**  
+Son herramientas para evaluar medidas de confiabilidad del software recabadas y visualizarlas de una manera mas sencilla
+
+Conclusion
+-------
+Despues de haber hecho la lectura me doy cuenta de que el proceso entero detras de la creacion de un programa bueno es mucho mas grande de lo que uno normalmente pensaria cuando lo ves desde el aspecto de un desarrollador. Normalmente cuando uno tiene una idea de un programa o cosa que suena interesante de hacer uno se pone directo a programar, sin dar mucho enfasis a la planeacion, pruebas o diseño en si, todo pura construccion; y no es que sea malo en si, mucha gente le gusta el aspecto de la programacion pero despues de leer esto me doy cuenta de que hacer la planeacion tiene un efecto tremendo en el resultado final. Es realmente comparable a hacer una casa de troncos en el bosque contra una casa bien planeada; puede que la casa de troncos si sirva para dormir y taparte de la lluvia y animales salvajes, pero al momento de querer expandir o que tenga cosas minimamente complejas como cableado o cosas por el estilo, la conveniencia de ser mas facil de construir se derrumba ya que no puedes hacer realmente nada sin hacer un destrozo de la casa; o minimo, asi lo percibo yo.
+
+### Respuesta a la pregunta
+Lo que mas me llamo la atencion de la lectura fue la seccion de testing ya que es un area que sabia que existia, pero no habia investigado realmente como se hacia o nada por el estilo, y el aprender cosas nuevas me gusta bastante, asi que probablemente es una de las cosas que mas me llamo la atencion de la lectura. Tambien se me hizo bastante interesante el que hubieran matematicas en lugares inesperados en secciones que no tenia ni idea que podia estar, como la parte de generacion de casos de prueba.
