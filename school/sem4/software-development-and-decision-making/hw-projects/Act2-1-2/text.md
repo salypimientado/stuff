@@ -1,6 +1,7 @@
 Resumen SWEBOK Cap. 1-4
 ==================================
 #### Autor: Juan Pablo Salazar Garcia
+#### Matricula: A01740200
 #### Clase: Construccion de Software y Toma de Decisiones
 Capitulo 1: Software Requirements
 ---------------------------------
@@ -528,7 +529,8 @@ Si las pruebas estan basadas en como esta hecho el codigo/software
 	- **Black-box**  
 Si las pruebas nada mas dependen del input/output del software
 
-A continuacion estan las tecnicas mas usadas para hacer testing:
+A continuacion estan las tecnicas mas usadas para hacer testing:  
+
 + **Ad hoc**  
 Se basa en el conocimiento y experiencia del ingeniero de software
 + **Exploratory Testing**  
@@ -568,6 +570,7 @@ Se hacen casos de prueba relevantes a ciertas actividades definidas
 ### Test-Related Measures
 
 Hay varias indicadores que se utilizan para analizar calidad, y en el area de testing para medir progreso se pueden utilizar varias cosas que sirven para optimizar el proceso de testing
+
 + Hay medidas que se basan en el tamaño del codigo
 + Existen muchos tipos de faults, y saber identificarlas puede ser util al analizar el software que es testeado
 + Hay modelos de confiabilidad de codigo que se basan en las faults que estiman que entre menos fallas hay mas confiable es el programa
@@ -591,6 +594,7 @@ Todo lo anterior debe ser integrado a un proceso de testing bien definido
 Ya que el testing es una labor que si se hace de manera manual toma muchisimo tiempo, hay herramientas que hacen esto mucho menos tedioso
 
 Existen multiples herramientas hechas para esto:
+
 + **Test harnesses**  
 Estos son environments en los que las pruebas son hechas y los resultados son guardados
 
