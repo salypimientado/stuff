@@ -20,9 +20,15 @@
 **** Body
      En si el cuerpo de la pagina
      Tags:
-     - <p> Parrafo
-     - <div> Division
-     - <span> Span
+    | Tag     | Tipo de elemento|
+    |---------+---------------- |
+    | <p>     |  Parrafo        |
+    | <div>   |  Division       |
+    | <span>  |  Span           |
+    | <ul>    |  Unordered List |
+    | <li>    |  List Item      |
+    | <form>  |  Formulario     |
+     
 
      Atributos:
      - id
@@ -52,6 +58,69 @@
        
        
 *** CSS
+    Permite cambiar los estilos por secciones
+
+    Ejemplo:
+    
+    - .d1 : {
+      bg-color: #FF00FF
+      font-size: 15
+      }
+      
+      + Se incluye en el html como referencia de tipo stylesheet o en el mismo
+        archivo con el tag <style>
+   
+****  Bootstrap
+     Da una serie de clases de CSS predefinidas que se pueden usar en el html
+     que sirven para el formato
+
+     + Se incluye en el html como referencia al inicio y tambien se incluye el
+       javascript como script
+    
+*** Javascript
+    Typeless scripting language
+
+    + Las variables no tienen tipo
+   #+begin_src js
+     let integer = 1290;
+     console.log(integer);
+     integer = "value";
+     console.log(integer);
+   #+end_src
+
+   #+RESULTS:
+   : 1290
+   : value
+   : undefined
+      
+  
+**** Variable types 
+     #+begin_src js
+       //object
+       let array = [1,12.30, "string", [1,2,3], {a:"b"}];
+       console.log(array);
+       //object
+       let config_map = {
+          int_key: 10,
+          string_key: "str",
+          kpi_one: {
+              display_type: "time_series",
+              operation: "grouing_person"
+          },
+          fun: (arg_one) => {
+              console.log(arg_one);
+          }
+       }
+       console.log(config_map);
+       config_map.fun("holis");
+     #+end_src
+
+     #+RESULTS:
+     : [1 (\, 12.3) (\, 'string) '(\, [1 (\, 2) (\, 3)]) (\, {) a: 'b '}]
+
+**** Flow Control
+     
+
 ** Bases de datos
 *** Metodogias agiles 
     Forma de implementar proyectos basada en iteraciones minimas funcionales
@@ -63,7 +132,7 @@
        Los procesos agiles aprovechan el camio para proporcionar ventaja competitiva
        al cliente
 
-   
+   TODO <<< esto
 **** Marco de trabajo o metodos agiles 
      - SCRUM
        * marco de trabajo dentro del cual se pueden atender problemas complejos,
@@ -144,6 +213,58 @@
       
       Usuario: Individuo u organizacion que usa el producto o servicio
       
+*** Design Thinking
+    Metodo para generar ideas que se centra en entender y dar solucion a las necesidades
+    del cliente
+   
+**** Fases
+
+***** Empatia
+      Capacidad de identificarse cn alguien y compartir sus sentimientos
+
+      En esencia, pensar como si fueras el cliente para saber las mejores maneras
+      para ayudarlos
+
+***** Definicion
+      Se recaban requerimientos en esta fase
+
+***** Ideacion
+      Se generan ideas para satisfacer las necesidades del cliente
+
+      - No se descartan ideas
+      - Despues se hace una evaluacion y se seleccionan las mejores
+
+***** Prototipo
+      Se construyen prototipos de las ideas seleccionadas y permite visualizar posibles
+      soluciones
+
+***** Pruebas
+      Probamos el prototipo con segmentos de clientes a los que deseamos proponer
+      nuestra solucion
+      
+** Ingenieria de software 
+  
+*** 5 P del desarrollo de software
+    - Proceso
+    - Planes
+    - Proyecto
+    - Personas
+      
+     construyen
+        ----> 
+        
+    - Producto
+
+*** Proceso de desarrollo de software
+   | # | Fase         | Consiste en                                  |
+   |---+--------------+----------------------------------------------|
+   | 0 | Necesidades  | Obtener requerimientos                       |
+   | 1 | Analisis     | Req. Funcionales y No Funcionales/Prototipos |
+   | 2 | Diseño       | Dis. de arquitectura/bajo nivel              |
+   | 3 | Construccion | Codificacion/Pruebas                         |
+   | 4 | Despliegue   | Instalacion/Parametrizacion/Entrenamiento    |
+    
+
 ** Reto
 *** Reunion CEMEX
     Objetivo:
@@ -156,13 +277,13 @@
     - Simular la ejecucion de los diferentes juegos diseñados utilizando la
       linea de tiempo de los datos provistos
     - Evaluar el beneficio de implementar el modelo en un ambiente productivo
+ 
+****  KPI
+     - Key performance indicator
+     - Utilizado para sintetizar informacion sobre eficacia y productividad
 
-    KPI
-    - Key performance indicator
-    - Utilizado para sintetizar informacion sobre eficacia y productividad
-
-    Lead Indicators
-    - Tratan de predecir el futuro
+     Lead Indicators
+     - Tratan de predecir el futuro
      
 ***** Porque gamificacion 
      Ayuda a mejorar los siguientes aspectos:
@@ -174,4 +295,5 @@
 
        
 ** Actividades
-*** TODO Act 2.1.1
+*** DONE Act 2.1.1
+    CLOSED: [2021-04-05 Mon 08:14]

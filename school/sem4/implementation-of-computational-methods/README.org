@@ -352,14 +352,13 @@
       - S -> \epsilon
      
 *** Sesion 10
-   
 **** Automata de pila 
      Forma de representar un lenguaje libre de contexto
 
      * Es una tupla de la forma M = (Q,\sigma,\gamma,\delta,q,F)
      donde:
      - Q es un conjunto finito de estados
-     - \sigma es el alfabeto de la cinta (sin incluir cuadrado)1
+     - \sigma es el alfabeto de la cinta (sin incluir cuadrado)
      - \gamma es el alfabeto de la pila (incluyendo $)
      - q elem Q es el estado inicial
      - f subset Q es un conjunto finito de estados finales
@@ -370,5 +369,20 @@
 
      * Delta se representa de la siguiente manera:
 
-     - ((q0,a,$),(q0,R,x 
+     - ((q0,a,$),(q0,R,S))
+     - ((q0,a,S),(q0,R,SS))
+     - ((q0,b,S),(q0,R,empty string))
+     - ((q0,empty string,$),(q1,R,empty string))
      
+*** Sesion 11
+   
+**** Pumping Lemma
+     Si A es un lenguaje regular:
+     Existe un entero p mayor a 0, que es el pumping length y todas las palabras
+     mas grandes a este entero pueden ser partidos en tres partes, y y puede ser
+     repetido infinitas veces
+
+     
+     
+    
+    
