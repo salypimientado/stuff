@@ -91,7 +91,6 @@
    #+RESULTS:
    : 1290
    : value
-   : undefined
       
   
 **** Variable types 
@@ -119,8 +118,46 @@
      : [1 (\, 12.3) (\, 'string) '(\, [1 (\, 2) (\, 3)]) (\, {) a: 'b '}]
 
 **** Flow Control
-     
+#+begin_src js
+if(0) {
+  console.log("in the if")
+} else if(1) {
+  console.log("in the else if")
+} else {
+  console.log("in the else")
+} 
 
+
+switch ("MAYBE") {
+  case "YES":
+    console.log("yes")
+    break
+  case "NO":
+    console.log("no")
+    break
+  default:
+    console.log("default")
+}
+let i = 0 
+while(i < 5){
+  console.log(i)
+  i++
+}
+
+let array = [1,12.30, "strng", [1,2,3], {a:"b"}]
+for (let index = 0; index < array.length; index++) {
+  const element = array[index];
+  console.log(element)
+}
+
+for (let index in array) {
+  console.log(array[index])
+}
+array.map
+array.forEach(element => {
+  console.log(element)
+});
+#+end_src
 ** Bases de datos
 *** Metodogias agiles 
     Forma de implementar proyectos basada en iteraciones minimas funcionales
@@ -263,8 +300,26 @@
    | 2 | Diseño       | Dis. de arquitectura/bajo nivel              |
    | 3 | Construccion | Codificacion/Pruebas                         |
    | 4 | Despliegue   | Instalacion/Parametrizacion/Entrenamiento    |
-    
+   
+   
+*** Diseño
+ 
+**** Patrones 
+***** Cliente-servidor?
+Se conectan los clientes a un servidor
+***** Modelo-Vista-Controlador
+El usuario manda una peticion al controlador, este hace comunicaicon con el modelo y se lo regresa al usuario en forma de vista.
 
+*** Actividades
+    
+  
+**** <2021-04-09 Fri 08:35> 
+
+***** ¿Que es arquitectura?
+     Segun la RAE, arquitectura es el diseño de una construccion, asi como la estructura logica de los componentes de una computadora o programa.
+   
+***** ¿Que es un diagrama/dibujo arquitectonico y para que sirve?
+      Un diagrama arquitectonico es una representacion visual de un diseño y sus componentes, sirviendo para darse una idea general del diseño.
 ** Reto
 *** Reunion CEMEX
     Objetivo:
@@ -292,7 +347,7 @@
        de lo importante por parte de los miembros del equipo
      - Baja motivacion del equipo a seguir politicas y lineamientos, esto
        trae como consecuencias fallas en la calidad y por ende en la velocidad
-
+       
        
 ** Actividades
 *** DONE Act 2.1.1

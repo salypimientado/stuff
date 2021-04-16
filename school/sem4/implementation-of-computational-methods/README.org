@@ -1,4 +1,5 @@
 #+STARTUP: hidestars
+#+STARTUP: latexpreview
 
 * Implementación de métodos computacionales
 ** Tareas
@@ -385,4 +386,93 @@
      
      
     
+*** Sesion 12
+**** TODO Maquinas de Turing
+     Hay lenguajes que no se pueden representar con lenguajes regulares ni libres de contexto
+
+     * Une el input y la memoria
+      
+*****  Tiene los siguientes elementos:
+      * Un conjunto de estados de control finito
+      * Una cinta infinita que se usa como memoria
+      * Un cabezal en la cinta que puede leer y escribir en una celda
+
+*****  Definicion informal
+      Sea M una maquina de Turing:
+      * M acepta una palabra w si entra al estado de aceptacion cuando se lee w. En este caso, M termina
+      * M rechaza una palabra w si entra al estado de aceptacion cuando se lee w. En este caso, M termina
+      * M entra en loop con una palabra w si al leer w no entra ni al estado de aceptacion ni al de rechazo.
+        En este caso, M no termina
+
+      El lenguaje de una maquina de Turing M, denotado con L(M) es el conjunto de todas las palabras que M
+      acepta
+
+      Teorema 1:
+      + Si lo puede hacer una maquina de Turing, entonces hay un algoritmo para ello.
+
+
+***** TODO Definicion formal
+      Sea M una maquina de Turing M para reconocer palabras de un lenguaje es una tupla de la forma
+      $M = (Q,\Sigma,\Gamma,\delta,q,a,r)$
+
+      donde
+     | Termino  | Valor                      |
+     |----------+----------------------------|
+     | $Q$      | Conjunto finito de estados |
+     | $\Sigma$ | Alfabeto del input         |
+     | $\Gamma$ | Alfabeto de la cinta       |
+     | $\delta$ | Funcion de transicion      |
+     | $q$      | Estado inicial             |
+     | $a$      | Estado de aceptacion       |
+     | $r$      | Estado de rechazo          |
+      
+      
+      
+***** TODO Configuracion inicial
+      * La cinta esta vacia, es decir nada tiene simbolos vacios
+      * 
     
+**** Analisis de algoritmos
+
+***** TODO Tiempo de ejecucion
+      El tiempo de ejecucion depende de muchos factores
+      - Entrada del programa
+    
+***** Notacion asintotica
+      Da un estimado de que tanto crece la funcion con el input
+
+****** Big O
+       Upper bound
+
+      
+****** Omega g
+       Lower bound
+
+****** Theta g
+       Upper and lower bound
+
+***** Complejidad asintotica:
+      - Se consigue con el maximo de todas las complejidades
+
+      - En un if se decide con el maximo de las complejidades
+      - En un ciclo depende ya que se eliminan coeficientes
+    
+***** Divide and Conquer
+      Se dividen los problemas en problemas mas chicos
+
+***** TODO Teorema maestro
+      Supongamos que $n=c^k$ y $c>1$. Entonces
+      
+ 
+*** Sesion 13
+**** Maquina de Turing
+Se usa la notacion siguiente:
+$x \rightarrow y,D$
+Donde:
+- $x=$ es lo que se lee
+- $y=$ es lo que se escribe
+- $D$ es la direccion a donde se va
+
+Se empieza a hacer con casos correctos y despues se cubren excepciones
+***** Subrutina
+Serie de estados chicos en la MT que realizan una computacion pequeña
