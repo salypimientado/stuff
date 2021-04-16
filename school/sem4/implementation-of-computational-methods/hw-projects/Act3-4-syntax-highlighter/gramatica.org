@@ -1,0 +1,15 @@
+* Resaltador sintactico
+** Gramatica:
+| Regla       | Expresion   |
+|-------------+-------------|
+| Exp         | TR          |
+|             |             |
+| Resto (R)   | S           |
+|             | Sustraccion |
+|             | $\epsilon$  |
+|             |             |
+| Suma (S)    | +TR         |
+|             |             |
+| Sustraccion | -TR         |
+|             |             |
+|             |             |
