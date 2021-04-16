@@ -1,6 +1,7 @@
 # Prerequisites
 *.d
 */sem4-cemex
+*/ltximg
 
 # Compiled Object files
 *.slo
