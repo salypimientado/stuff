@@ -126,8 +126,10 @@ if(0) {
 } else {
   console.log("in the else")
 } 
+#+end_src
 
 
+#+begin_src js
 switch ("MAYBE") {
   case "YES":
     console.log("yes")
@@ -138,6 +140,9 @@ switch ("MAYBE") {
   default:
     console.log("default")
 }
+#+end_src
+
+#+begin_src js
 let i = 0 
 while(i < 5){
   console.log(i)
@@ -149,7 +154,10 @@ for (let index = 0; index < array.length; index++) {
   const element = array[index];
   console.log(element)
 }
+#+end_src
 
+#+begin_src js
+let array = [1,12.30, "strng", [1,2,3], {a:"b"}]
 for (let index in array) {
   console.log(array[index])
 }
@@ -158,6 +166,28 @@ array.forEach(element => {
   console.log(element)
 });
 #+end_src
+
+#+begin_src js
+    document.addEventListener("DOMContentLoaded", (_event) => {
+      document.querySelector("p#my-p-id").innerHTML = "hola mundo"
+      let click_function = (event) => {
+        console.log("clicked")
+        console.log(event)
+        console.log(event.target)
+        console.log(event.currentTarget)
+      }
+      document.querySelector("#my-btn").addEventListener("click", click_function)
+      document.querySelector("input.key-event").addEventListener("keyup", click_function)
+    })
+#+end_src
+
+#+begin_src js
+
+#+end_src
+**** Events
+Cosas que pasan en una pagina y se pueden conectar con funciones
+
+
 ** Bases de datos
 *** Metodogias agiles 
     Forma de implementar proyectos basada en iteraciones minimas funcionales

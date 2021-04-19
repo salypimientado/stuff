@@ -385,7 +385,6 @@
 
      
      
-    
 *** Sesion 12
 **** TODO Maquinas de Turing
      Hay lenguajes que no se pueden representar con lenguajes regulares ni libres de contexto
@@ -463,7 +462,6 @@
 ***** TODO Teorema maestro
       Supongamos que $n=c^k$ y $c>1$. Entonces
       
- 
 *** Sesion 13
 **** Maquina de Turing
 Se usa la notacion siguiente:
@@ -476,3 +474,19 @@ Donde:
 Se empieza a hacer con casos correctos y despues se cubren excepciones
 ***** Subrutina
 Serie de estados chicos en la MT que realizan una computacion pequeña
+*** Sesion 14
+**** Maquinas de Turing como generadores de lenguajes
+- Las maquinas de Turing deterministas tienen la misma potencia que las no deterministas
+***** Descripcion instantanea
+Un tipo snapshot del estado de una maquina de Turing en un momento especifico
+- Hay un teorema que dice que para todas las maquinas de turing, siempre hay una maquina de turing que puede simular un paso de la primera maquina
+
+***** Computo efectivo
+Forma de computo con las siguientes propiedades:
+1. El computo consiste de un conjunto de pasos
+2. hay reglas fijas de que sigue despues de que
+3. Todas las computaciones que dan una respuesta lo hacen en una cantidad finita de pasos
+4. Siempre da la respuesta correcta
+***** Church-Turing thesis
+Todos las computaciones hechas son equivalentes o peores a una maquina de turing equivalente
+
