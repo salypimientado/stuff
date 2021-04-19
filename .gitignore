@@ -1,5 +1,6 @@
 # Prerequisites
 *.d
+*/ltximg
 
 # Compiled Object files
 *.slo
