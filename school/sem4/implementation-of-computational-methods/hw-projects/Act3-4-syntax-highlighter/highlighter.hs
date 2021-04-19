@@ -1,21 +1,41 @@
-{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE MultiWayIf #-}
 import Data.Char ()
+import Data.Maybe (fromJust)
 import System.Exit (die)
-import System.Environment
 import System.IO (hFlush, stdout)
 
 main = do
-  args <- getArgs
-  contents <- readFile $ head args
+  putStrLn "Ingrese el nombre del archivo"
+  hFlush stdout
+  file <- getLine
+  contents <- readFile file
   if 999 `notElem` concatMap (statesHelper 0) (map init $ lines contents)
-    then putStr ""
+    then putStrLn "Archivo leido correctamente"
     else die "Se encontraron palabras no reconocidas en el archivo introducido"
-  let lexed = concatMap simplifyTokens $ map tokens (map init $ lines contents)
-  putStr $ lexed
+--{-
+  putStr $ fromJust $ lexExp $ Just $ tokens $ concatMap init $ lines contents
+--}
 
-simplifyTokens :: [([Char],Int)] -> String
-simplifyTokens [] = ""
-simplifyTokens ((token,state):xs) = show state ++ " " ++ token ++ "\n" ++ simplifyTokens xs
+lexExp  exp = do
+  a <- checkTerm exp
+  b <- checkRest a
+  if b == Nothing
+    then Just "mal mal mal"
+    else Just "Expresion checada"
+
+checkTerm ( Just ((token,state):exp) ) = do
+  if state `elem` [101,111] then return (Just exp) else Nothing
+
+checkRest ( Just [] ) = return $ Just [""]
+checkRest Nothing = Nothing
+checkRest ( Just ((token,state):exp) ) = do
+  if
+    | state == 103 -> do
+        checkTerm ( Just exp ) >>= checkRest
+    | state == 104 -> do
+        checkTerm ( Just exp ) >>= checkRest
+    | otherwise -> return $ Nothing
+-- De aqui para abajo es el lexer
 
 lexer :: [[Char]] -> [[Char]]
 lexer = map lexLine
