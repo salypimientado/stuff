@@ -489,4 +489,18 @@ Forma de computo con las siguientes propiedades:
 4. Siempre da la respuesta correcta
 ***** Church-Turing thesis
 Todos las computaciones hechas son equivalentes o peores a una maquina de turing equivalente
+*** Sesion 15
+**** Decidibilidad
+El reconocer si algo es correcto es mucho mas facil que resolver si lo esta
+
+**** Problemas P
+Problemas que se resuelven a lo mucho con un tiempo polinomial
+
+- Se verifican facilmente
+
+**** Problemas NP
+Problemas que se pueden resolver con maquinas no deterministas
+
+- NP significa non-deterministic polinomial
+- Se resuelven con maquinas no deterministas pero se verifican con maquinas deterministas
 

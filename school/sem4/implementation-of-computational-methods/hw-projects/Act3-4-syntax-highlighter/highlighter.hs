@@ -23,6 +23,8 @@ lexExp  exp = do
     then Just "mal mal mal"
     else Just "Expresion checada"
 
+checkTerm Nothing = Nothing
+checkTerm (Just []) = return $ Just []
 checkTerm ( Just ((token,state):exp) ) = do
   if state `elem` [101,111] then return (Just exp) else Nothing
 
