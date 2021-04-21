@@ -1,16 +1,32 @@
 * Resaltador sintactico
 ** Gramatica:
-| Regla       | Expresion       |
-|-------------+-----------------|
-| Exp         | TR              |
-|             |                 |
-| Resto (R)   | S               |
-|             | Sustraccion     |
-|             | $\epsilon$      |
-|             |                 |
-| Suma (S)    | +TR             |
-|             |                 |
-| Sustraccion | -TR             |
+| Regla         | Expresion                 |
+|---------------+---------------------------|
+        
+| ExpList       | E                         |
+|               |                           |
+| Expresion (E) | E -> CE (comentario) |
+        '106':"Comment",
+|               | E -> (E) (parentesis)     |
+        '109':"Par in",
+        '110':"Par fin",
+|               | E -> ^EE (exponente) |
+        '108':"Potencia",
+|               | E -> /EE (division)       |
+        '105':"Division",
+|               | E -> *EE (multiplicacion) |
+        '107':"Multiplicacion",
+|               | E -> -EE (resta)          |
+        '104':"Resta",
+|               | E -> +EE (suma)           |
+        '103':"Suma",
+|               | E -> =EE (asignacion) |
+        '102':"Asignacion",
+|             | E -> TE         |
+|             | E -> $\epsilon$ |
 |             |                 |
 | Termino (T) | Variable/Numero |
-|             |                 |
+        '101':"Variable",
+        '111':"Numero"
+|               |                           |
+
