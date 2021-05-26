@@ -1,5 +1,5 @@
 -module ('hello'). 
--export([primes/1, listfromxtoy/2, divide/2, primesConcurrent/1, listfromone/1, listener/2, primesfromlist/2,compare/1, concurrente/1,secuencial/1]).
+-export([primes/1, listfromxtoy/2, divide/2, listfromone/1,concurrent/2,listmanager/3, worker/0]).
 
 
 listfromone(X) -> if
@@ -40,39 +40,46 @@ divide(N, N, L, Acc) ->
 divide(N, X, [H|T], Acc) ->
     divide(N, X+1, T, [H|Acc]).
 
-listener(N, A) ->
-    io:format("index: ~p~n", [N]),
+getdivisibleby(List,Num) ->
+    lists:filter(fun(X) -> (X rem  Num == 0 ) and ( X /= Num ) end,List) .
+
+checkprimes(List,X, Pid) -> 
+    Pid! {modifyList, getdivisibleby(List,X)}.
+
+worker() ->
     receive
-         {Amount} when N > 1 -> 
-            listener(N-1, A + Amount);
-        {Amount} -> X = A + Amount,
-                    io:format("Resultado suma primos concurrente: ~p~n", [X])
+        {Pid, List, X} ->
+                checkprimes(List,X,Pid),
+                Pid ! {sendNext, self()},
+            worker();
+        {done} -> 0
     end.
 
-primesConcurrent(X) ->
-    List = listfromone(X),
-    Lists = divide(List,trunc(math:ceil(length(List)/20))),
-    Adder = spawn(hello,listener,[20,0]),
-    spawn(hello,primesfromlist,[ lists:nth(1,Lists) , Adder]),
-    spawn(hello,primesfromlist,[ lists:nth(2,Lists) , Adder]),
-    spawn(hello,primesfromlist,[ lists:nth(3,Lists) , Adder]),
-    spawn(hello,primesfromlist,[ lists:nth(4,Lists) , Adder]),
-    spawn(hello,primesfromlist,[ lists:nth(5,Lists) , Adder]),
-    spawn(hello,primesfromlist,[ lists:nth(6,Lists) , Adder]),
-    spawn(hello,primesfromlist,[ lists:nth(7,Lists) , Adder]),
-    spawn(hello,primesfromlist,[ lists:nth(8,Lists) , Adder]),
-    spawn(hello,primesfromlist,[ lists:nth(9,Lists) , Adder]),
-    spawn(hello,primesfromlist,[ lists:nth(10,Lists) , Adder]),
-    spawn(hello,primesfromlist,[ lists:nth(11,Lists) , Adder]),
-    spawn(hello,primesfromlist,[ lists:nth(12,Lists) , Adder]),
-    spawn(hello,primesfromlist,[ lists:nth(13,Lists) , Adder]),
-    spawn(hello,primesfromlist,[ lists:nth(14,Lists) , Adder]),
-    spawn(hello,primesfromlist,[ lists:nth(15,Lists) , Adder]),
-    spawn(hello,primesfromlist,[ lists:nth(16,Lists) , Adder]),
-    spawn(hello,primesfromlist,[ lists:nth(17,Lists) , Adder]),
-    spawn(hello,primesfromlist,[ lists:nth(18,Lists) , Adder]),
-    spawn(hello,primesfromlist,[ lists:nth(19,Lists) , Adder]),
-    spawn(hello,primesfromlist,[ lists:nth(20,Lists) , Adder]).
+listmanager(Original, Cur, Max)->
+    receive
+        {sendNext, Pid} when Max+1 > Cur-> Pid ! {self(),Original,Cur},
+                           listmanager(Original,Cur+1,Max);
+        {sendNext, Pid} -> Pid ! {done};
+
+        {modifyList, NumsToRemove} when Cur == Max-1 -> io:format("final = ~p~n",[lists:sum(lists:filter(fun(X) -> not lists:member(X,NumsToRemove) end,Original))]);
+        {modifyList, NumsToRemove} ->  listmanager(lists:filter(fun(X) -> not lists:member(X,NumsToRemove) end,Original),Cur, Max)
+
+end.
+
+
+workerspawner(ManagerPid,Cur)-> if
+    Cur /= 0 ->
+    Worker = spawn(hello,worker,[]),
+    ManagerPid ! {sendNext, Worker},
+    workerspawner(ManagerPid, Cur-1);
+    true -> io:format("all workers spawned~n") end.
+
+
+concurrent(X,Threads)->
+    A = listfromone(X),
+    Max = trunc(math:ceil(math:sqrt(X+2))),
+    Listmanager = spawn(hello,listmanager,[A,2,Max]),
+    workerspawner(Listmanager, Threads).
 
 compare(X) ->
     Seq = timer:tc(hello,primes,[X]),
