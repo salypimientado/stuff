@@ -1,71 +1,80 @@
--module ('hello'). 
--export([primes/1, listfromxtoy/2, divide/2, listfromone/1,concurrent/2,listmanager/3, worker/0]).
+-module ('hello').
+-export([primes/1, checkifprime/2,concurrent/3, manager/4, worker/0, concurrente/2, secuencial/1,concurrentTimer/0]).
 
 
-listfromone(X) -> if
-    X > 1 ->  lists:append(listfromone(X-1),[X]);
-    true -> []
-    end.
-
-sieve(List,Index, Max) -> if
-    Index < Max -> New = lists:filter(fun(X) -> ( X rem Index /= 0 ) or ( Index == X ) end, List),
-    sieve(New,Index+1,Max);
-    true -> 
-    List end.
 
 primes(X) ->
-    Nums = listfromone(X),
-    Max = math:sqrt(length(Nums)) +1,
-    io:format("Resultado suma primos no concurrente: ~p~n", [lists:sum(sieve(Nums,2,Max))]).
+    Result = recursePrime(X,0),
+    io:format("Resultado suma primos no concurrente: ~p~n", [Result]).
 
-primesfromlist(Nums, Pid) ->
-    Max = math:sqrt(lists:last(Nums)) +1,
-    A = lists:sum(sieve(Nums,2,Max)),
-    %io:format("num = ~p ~p~n", [Max,A]),
-    Pid ! {A}.
+recursePrime(X,Sum) ->
+    if
+        X == 1 ->
+            Sum;
+        true ->
+            New = checkifprime(X,2) + Sum,
+            recursePrime(X-1,New)
+    end.
 
-listfromxtoy(X,Y) -> if
-    Y > X-1 ->  lists:append(listfromxtoy(X,Y-1),[Y]);
-    true -> []
+checkifprime(X,Y) ->
+    Overroot = Y > math:sqrt(X),
+    if
+        Overroot == true -> X;
+        Overroot == false ->
+            case (X rem Y) of
+                0 ->
+                    0;
+                _ ->
+                    checkifprime(X, Y+1)
+            end
     end.
 
 
-divide(L, N) when is_integer(N), N > 0 ->
-    divide(N, 0, L, []).
 
-divide(_, _, [], Acc) ->
-    [lists:reverse(Acc)];
-divide(N, N, L, Acc) ->
-    [lists:reverse(Acc) | divide(N, 0, L, [])];
-divide(N, X, [H|T], Acc) ->
-    divide(N, X+1, T, [H|Acc]).
 
-getdivisibleby(List,Num) ->
-    lists:filter(fun(X) -> (X rem  Num == 0 ) and ( X /= Num ) end,List) .
 
-checkprimes(List,X, Pid) -> 
-    Pid! {modifyList, getdivisibleby(List,X)}.
 
-worker() ->
+
+
+
+worker()->
     receive
-        {Pid, List, X} ->
-                checkprimes(List,X,Pid),
-                Pid ! {sendNext, self()},
-            worker();
-        {done} -> 0
-    end.
+        {number,Pid, X} ->
+            Value = checkifprime(X,2),
+            if Value /= 0 -> Pid ! {add, Value};
+               true -> Pid ! {zero}
+            end,
+            Pid ! {sendNext , self()},
+            worker()
 
-listmanager(Original, Cur, Max)->
-    receive
-        {sendNext, Pid} when Max+1 > Cur-> Pid ! {self(),Original,Cur},
-                           listmanager(Original,Cur+1,Max);
-        {sendNext, Pid} -> Pid ! {done};
-
-        {modifyList, NumsToRemove} when Cur == Max-1 -> io:format("final = ~p~n",[lists:sum(lists:filter(fun(X) -> not lists:member(X,NumsToRemove) end,Original))]);
-        {modifyList, NumsToRemove} ->  listmanager(lists:filter(fun(X) -> not lists:member(X,NumsToRemove) end,Original),Cur, Max)
 
 end.
 
+
+manager(X,Active,Value,Timer) ->
+    case X == 1 of
+        false ->
+            receive
+                {sendNext,Worker} ->
+                                                %io:format("index #~p~n", [X]),
+                    Worker ! {number,self(), X},
+                    manager(X-1, Active+1,Value,Timer);
+                {zero} -> manager(X, Active-1,Value,Timer);
+
+                {add, Amount} -> manager(X, Active-1,Value+Amount,Timer)
+            end;
+
+        true -> receive
+                    {zero} -> manager(X, Active-1,Value,Timer);
+                    {add, Amount} ->
+                        if
+                            Active == 1 ->
+                                Timer ! finish,
+                                io:format("Valor calculado concurrente = ~p~n", [Value + Amount]);
+                            true -> manager(X, Active-1,Value+Amount,Timer)
+                        end
+                end
+    end.
 
 workerspawner(ManagerPid,Cur)-> if
     Cur /= 0 ->
@@ -75,23 +84,69 @@ workerspawner(ManagerPid,Cur)-> if
     true -> io:format("all workers spawned~n") end.
 
 
-concurrent(X,Threads)->
-    A = listfromone(X),
-    Max = trunc(math:ceil(math:sqrt(X+2))),
-    Listmanager = spawn(hello,listmanager,[A,2,Max]),
+concurrent(X,Threads,Timer)->
+    Listmanager = spawn(hello,manager,[X,0,0,Timer]),
     workerspawner(Listmanager, Threads).
 
-compare(X) ->
-    Seq = timer:tc(hello,primes,[X]),
-    Conc = timer:tc(hello,primesConcurrent,[X]),
-    io:format("Concurrente: ~p segundos~n", [element(1,Conc)/1000]),
-    io:format("No concurrente: ~p segundos~n", [element(1,Seq)/1000]).
+
+concurrentTimer()->
+    T1 = erlang:now(),
+    receive
+        finish ->
+            T2 = erlang:now(),
+            Native = timer:now_diff(T2,T1),
+            Milli = Native * math:pow(10,-3),
+            Second = Milli / 1000,
+            io:format("Concurrente: ~p milisegundos~n", [Milli]),
+            io:format("Concurrente: ~p segundos~n -------------------------~n", [Second])
+end.
 
 
-concurrente(X) ->
-    Conc = timer:tc(hello,primesConcurrent,[X]),
-    io:format("Concurrente: ~p segundos~n", [element(1,Conc)/1000]).
+supercworker(MessageProcessor) ->
+    receive
+        {process, X} -> 
+            Value = checkifprime(X,2),
+            if Value /= 0 -> MessageProcessor ! {add, Value};
+               true -> Pid ! {zero}
+            end,
+            MessageProcessor ! {sendNext , self()},
+            worker(MessageProcessor)
+
+        end.
+
+messageprocessor(X, Adders, Active) ->
+
+    case X == 1 of
+        false ->
+            receive
+                {sendNext, Pid} -> 
+                    Pid ! {process, X},
+                    messageprocessor(X-1, Adders, Active+1);
+                {add, Number} -> 
+                    hd(Adders) ! {add, Number},
+                    messageprocessor(X-1, tl(Adders), Active-1)
+              ;
+                {available, Pid} ->
+                end;
+
+        true ->
+            receive
+                end
+    end.
+
+
+
+concurrente(X,Threads) ->
+    Timer = spawn(hello,concurrentTimer,[]),
+    concurrent(X,Threads,Timer).
 
 secuencial(X)->
-    Seq = timer:tc(hello,primes,[X]),
-    io:format("No concurrente: ~p segundos~n", [element(1,Seq)/1000]).
+    T1 = erlang:now(),
+    primes(X),
+    T2 = erlang:now(),
+    Native = timer:now_diff(T2,T1),
+    Milli = Native * math:pow(10,-3),
+    Second = Milli / 1000,
+    io:format("No concurrente: ~p milisegundos~n", [Milli]),
+    io:format("No concurrente: ~p segundos~n", [Second]).
+    

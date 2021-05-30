@@ -2,31 +2,25 @@
 ** Gramatica:
 | Regla         | Expresion                 |
 |---------------+---------------------------|
-        
-| ExpList       | E                         |
-|               |                           |
-| Expresion (E) | E -> CE (comentario) |
-        '106':"Comment",
-|               | E -> (E) (parentesis)     |
-        '109':"Par in",
-        '110':"Par fin",
-|               | E -> ^EE (exponente) |
-        '108':"Potencia",
-|               | E -> /EE (division)       |
-        '105':"Division",
-|               | E -> *EE (multiplicacion) |
-        '107':"Multiplicacion",
-|               | E -> -EE (resta)          |
-        '104':"Resta",
-|               | E -> +EE (suma)           |
-        '103':"Suma",
-|               | E -> =EE (asignacion) |
-        '102':"Asignacion",
-|             | E -> TE         |
-|             | E -> $\epsilon$ |
-|             |                 |
-| Termino (T) | Variable/Numero |
-        '101':"Variable",
-        '111':"Numero"
-|               |                           |
+| ExpList (F)   | F -> EF                  |
+|               | F -> $\epsilon$          |
+|               |                          |
+| Expresion (E) | E -> CE (comentario)     |
+|               | E -> (P (parentesis)     |
+|               | E -> T                   |
+|               | E -> $\epsilon$          |
+|               |                          |
+| Parentesis(P) | P -> E)O                 |
+|               |                          |
+| Op (O)        |                          |
+|               | O -> ^E (exponente)      |
+|               | O -> /E (division)       |
+|               | O -> *E (multiplicacion) |
+|               | O -> -E (resta)          |
+|               | O -> +E (suma)           |
+|               | O -> =E (asignacion)     |
+|               | O -> $\epsilon$          |
+|               |                          |
+| Termino (T)   | T -> Variable/Numero O   |
+|               | T -> -T                  |
 

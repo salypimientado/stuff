@@ -7,39 +7,27 @@ import System.IO (hFlush, stdout)
 main = do
   args <- getArgs
   contents <- readFile $ head args
-  if 999 `notElem` concatMap (statesHelper 0) (map init $ lines contents)
+  if 999 `notElem` concatMap (statesHelper 0 . init) (filter (not . null) $ lines contents)
     then putStr ""
     else die "Se encontraron palabras no reconocidas en el archivo introducido"
-  let lexed = concatMap simplifyTokens $ map tokens (map init $ lines contents)
-  putStr $ lexed
+  let lexed = concatMap (simplifyTokens . tokens) (filter (not . null) $ lines contents)
+  putStr lexed
 
-simplifyTokens :: [([Char],Int)] -> String
+simplifyTokens :: [(String,Int)] -> String
 simplifyTokens [] = ""
 simplifyTokens ((token,state):xs) = show state ++ " " ++ token ++ "\n" ++ simplifyTokens xs
 
-lexer :: [[Char]] -> [[Char]]
-lexer = map lexLine
 
-lexLine :: [Char] -> [Char]
-lexLine = tokenToText . tokens
-
-{- Function to:
-  Get current state with previous state
-  recall function with list without current char
-  pass state 0 if over 100 add state to return value
-  pass current is less than 100
--}
-
-tokens :: [Char] -> [([Char], Int)]
+tokens :: String -> [(String, Int)]
 tokens text = zip (getTokens text) (getTokenStates $ getStates text)
 
-getTokens :: [Char] -> [[Char]]
+getTokens :: String -> [String]
 getTokens text = split (addDelimiters text (getStates text)) '~'
 
-getStates :: [Char] -> [Int]
+getStates :: String -> [Int]
 getStates text = removeOne $ statesHelper 0 (text ++ " ")
 
-statesHelper :: Int -> [Char] -> [Int]
+statesHelper :: Int -> String -> [Int]
 statesHelper _ [] = []
 statesHelper 6 [x] = [106]
 statesHelper prevState (x : chars) =
@@ -53,10 +41,10 @@ statesHelper prevState (x : chars) =
             then current : nextState 0 x : statesHelper (nextState 0 x) chars
             else current : statesHelper (nextState 0 x) chars
 
-tokenToText :: [([Char], Int)] -> [Char]
+tokenToText :: [(String, Int)] -> String
 tokenToText = tokenTextHelper
 
-tokenTextHelper :: [([Char], Int)] -> [Char]
+tokenTextHelper :: [(String, Int)] -> String
 tokenTextHelper [] = []
 tokenTextHelper ((token, state) : xs)
   --"Tipo                    Token\n"
@@ -73,7 +61,7 @@ tokenTextHelper ((token, state) : xs)
   | state == 111 = "Numero                 " ++ removeWhitespace token ++ "\n" ++ tokenTextHelper xs
   | state == 999 = "Error                  " ++ removeWhitespace token ++ "\n" ++ tokenTextHelper xs
 
-addDelimiters :: [Char] -> [Int] -> [Char]
+addDelimiters :: String -> [Int] -> String
 addDelimiters [] _ = []
 addDelimiters _ [] = []
 addDelimiters [c] _ = [c]
@@ -141,7 +129,7 @@ getTokenStates (x : xs) =
     then x : getTokenStates xs
     else getTokenStates xs
 
-removeWhitespace :: [Char] -> [Char]
+removeWhitespace :: String -> String
 removeWhitespace (x : xs) =
   if x == ' '
     then removeWhitespace xs
