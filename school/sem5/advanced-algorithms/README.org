@@ -1,0 +1,39 @@
+* Advanced Algorithms
+
+
+ 
+** Backtracking 
+   DFS variant that generates possible solutions but removes unsuccessful candidates before analyzing them further, reducing resources spent
+
+
+  
+*** Examples
+**** N Queens
+Place N Queens in an N 
+
+**** Sum of subsets
+Given a set of objects with a given value, which subsets can be formed such that the sum of the values of its objects is an exact value? 
+AKA multi-value two-sum
+
+#+DOWNLOADED: screenshot @ 2021-08-24 09:51:42
+[[file:Advanced_Algorithms/2021-08-24_09-51-42_screenshot.png]]
+
+** Branch and bound
+Backtracking variant that uses a priority queue rather than the traditional recursive stack used by typical backtracking
+
+** Strings
+  
+*** Concepts
+| Substring | subsequence contained within a string          |
+| Suffix    | substring contained near the end of the string |
+| Prefix    | substring in the beginning of the string       |
+   
+*** Z function
+Given a string of length n, the z fucntion is an array of length n
+which determines how many values following its index match the prefix preceding it
+
+
+#+DOWNLOADED: screenshot @ 2021-08-31 09:32:48
+[[file:Advanced_Algorithms/2021-08-31_09-32-48_screenshot.png]]
+
+TODO jupyter clone for cpp(other languages too)

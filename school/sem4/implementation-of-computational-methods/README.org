@@ -1,4 +1,5 @@
-#+STARTUP: hidestars#+STARTUP: latexpreview
+#+STARTUP: hidestars
+#+STARTUP: latexpreview
 
 * Implementación de métodos computacionales
 ** Tareas
@@ -226,18 +227,6 @@
      δ : Q × Σ → Q es la función de transición,
      q ∈ Q es el estado inicial,
      F ⊆ Q es un conjunto de estados finales.
-
-     #+CAPTION: Ejemplo:
-     #+NAME: Ejemplo automata maquina expendedora
-     #+ATTR_ORG: :width 500
-     [[./imgs/Automaton.png]]
-
-     Ejemplo 2:
-     
-     #+CAPTION: Ejemplo:
-     #+NAME: Ejemplo 2
-     #+ATTR_ORG: :width 500
-       [[./imgs/Automaton2.png]]
      
      M = {Q, Σ, δ, q, F}
      Q = {q0,q1,q2}
@@ -661,7 +650,7 @@ Las listas son iguales que en Haskell practicamente.
      [1 | [1]].
      [1,1].
 
-     % Para concatenar se usa ++ (no usar mucho porque es O(n) ya que las listas son linked lists)
+     % Para concatenar se usa +​+ (no usar mucho porque es O(n) ya que las listas son linked lists)
      [1,2] ++ [3,4].
      [1,2,3,4].
 
@@ -738,4 +727,4 @@ end
 
 - Cada proceso en Erlang tiene una mailbox donde los mensajes se guardan a como van llegando
 #+ATTR_ORG: :width 800
-[[file:e:/personalStorage/school/sem4/implementation-of-computational-methods/README.org_20210523_162840_Vl34Uj.png]]
+[[file:~/stuff/school/sem4/implementation-of-computational-methods/README.org_20210523_162840_Vl34Uj.png]]

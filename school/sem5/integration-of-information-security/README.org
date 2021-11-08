@@ -1,0 +1,27 @@
+* Integracion de seguridad informatica en redes y sistemas de software
+** Tareas
+** Notas
+*** Conexiones
+- Hay 65000 puertos como maximo por host
+*** IPV6
+- Hexadecimales con formato red/longitud
+- Dividido de 4 en 4 separados por :
+- Se pueden abreviar cadenas de 0000 usando ::
+  * solo una vez ya que no hay forma de determinar
+| Global routing prefix | Subnet id | Interface ID |
+|-----------------------+-----------+--------------|
+| 48 bits               | 16 bits   | 64 bits      |
+
+Direcciones miscelaneas
+| unspecified | ::        |
+| localhost   | ::1       |
+| link-local  | FE80::/10 |
+
+- Todos los dispositivos tienen una direccion link-local que es exclusiva para la red local
+*** Access list
+    Sirven para
+   | URPF           |
+   | Access control |
+   | Interfaces     |
+   | telnet/ssh    |
+    

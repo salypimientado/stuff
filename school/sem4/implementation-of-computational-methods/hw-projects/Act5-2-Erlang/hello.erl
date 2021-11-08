@@ -83,12 +83,6 @@ workerspawner(ManagerPid,Cur)-> if
     workerspawner(ManagerPid, Cur-1);
     true -> io:format("all workers spawned~n") end.
 
-
-concurrent(X,Threads,Timer)->
-    Listmanager = spawn(hello,manager,[X,0,0,Timer]),
-    workerspawner(Listmanager, Threads).
-
-
 concurrentTimer()->
     T1 = erlang:now(),
     receive
@@ -101,6 +95,13 @@ concurrentTimer()->
             io:format("Concurrente: ~p segundos~n -------------------------~n", [Second])
 end.
 
+concurrent(X,Threads,Timer)->
+    Listmanager = spawn(hello,manager,[X,0,0,Timer]),
+    workerspawner(Listmanager, Threads).
+
+concurrente(X,Threads) ->
+    Timer = spawn(hello,concurrentTimer,[]),
+    concurrent(X,Threads,Timer).
 
 supercworker(MessageProcessor) ->
     receive
@@ -112,7 +113,7 @@ supercworker(MessageProcessor) ->
             MessageProcessor ! {sendNext , self()},
             worker(MessageProcessor)
 
-        end.
+    end.
 
 messageprocessor(X, Adders, Active) ->
 
@@ -127,7 +128,7 @@ messageprocessor(X, Adders, Active) ->
                     messageprocessor(X-1, tl(Adders), Active-1)
               ;
                 {available, Pid} ->
-                end;
+            end;
 
         true ->
             receive
@@ -136,9 +137,6 @@ messageprocessor(X, Adders, Active) ->
 
 
 
-concurrente(X,Threads) ->
-    Timer = spawn(hello,concurrentTimer,[]),
-    concurrent(X,Threads,Timer).
 
 secuencial(X)->
     T1 = erlang:now(),

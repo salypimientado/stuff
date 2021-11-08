@@ -1,6 +1,9 @@
 # Prerequisites
 *.d
-*/ltximg
+**/.ccls-cache/**
+core
+**/node_modules/**
+**/.ipynb_checkpoints/**
 
 # Compiled Object files
 *.slo
