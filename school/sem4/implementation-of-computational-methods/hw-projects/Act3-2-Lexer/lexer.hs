@@ -7,10 +7,10 @@ main = do
   hFlush stdout
   file <- getLine
   contents <- readFile file
-  if 999 `notElem` concatMap (statesHelper 0) (lines contents)
+  if 999 `notElem` concatMap (statesHelper 0) (map init $ lines contents)
     then putStrLn "Archivo leido correctamente"
     else die "Se encontraron palabras no reconocidas en el archivo introducido"
-  let lexed = "Tipo                    Token\n\n" : lexer (lines contents)
+  let lexed = "Tipo                    Token\n\n" : lexer (map init $ lines contents)
   putStr $ concat lexed
 
 lexer :: [[Char]] -> [[Char]]
