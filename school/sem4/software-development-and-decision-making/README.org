@@ -341,7 +341,7 @@ Se conectan los clientes a un servidor
 El usuario manda una peticion al controlador, este hace comunicaicon con el modelo y se lo regresa al usuario en forma de vista.
 
 *** Actividades
-    
+
   
 **** <2021-04-09 Fri 08:35> 
 
@@ -350,6 +350,54 @@ El usuario manda una peticion al controlador, este hace comunicaicon con el mode
    
 ***** ¿Que es un diagrama/dibujo arquitectonico y para que sirve?
       Un diagrama arquitectonico es una representacion visual de un diseño y sus componentes, sirviendo para darse una idea general del diseño.
+
+*** Testing
+El testing de software es:
+- Correr el programa para validar que no haya defectos antes de su entrega
+
+**** Limitantes del testing
+- Dificil estimar lo que se tardara en arreglar bugs
+- No muy efectivo en terminos de porcentaje (35-50%~ de bugs encontrados por testing)
+- Le quitan la elegancia al codigo
+- Generan mucho estres
+- Es tiempo desperdiciado (no genera valor)
+- Es costoso
+
+**** Metodos para diseño de casos de prueba
+
+***** Particion equivalente
+Se parten las entradas en conjuntos que actuan de formas similares
+
+***** Valores limite
+Se prueban los limites de los rangos
+- Expande la particion equivalente
+  
+***** Caminos basicos
+Se usa cuando existe un grafo
+
+| Reglas                                       |
+|----------------------------------------------|
+| Arcos solo tienen una direccion              |
+| Arcos siempre tienen un nodo en cada extremo |
+| Solo un inicio y un final                    |
+
+Se usa para probar todos los caminos posibles con la minima cantidad de pasos
+
+| Dibujar grafo |
+
+ Calcular cantidad de caminos basicos             
+ Se cuenta la cantidad de nodos y arcos y se sacan los caminos basicos con la formula: x = n - a +2 
+| Encontrar caminos basicos                       |
+|                                                 |
+12345
+1232345
+125
+12625
+126725
+1269625
+1268625
+| Hacer un caso de prueba para cada camino basico |
+
 ** Reto
 *** Reunion CEMEX
     Objetivo:

@@ -1,0 +1,57 @@
+\documentclass{jhwhw}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{braket}
+\usepackage{tikz}
+\usepackage{forest}
+\usepackage{booktabs}
+\usepackage{color,soul}
+\usepackage{enumitem}
+\usepackage{adjustbox}
+\usepackage[spanish]{babel}
+\newcommand{\subscript}[2]{$#1 _ #2$}
+\newcommand{\mytitle}{Act 3.4 Resaltador de sintaxis}
+\usepackage{graphicx}
+
+\begin{document}
+
+\author{Juan Pablo Salazar-A01740200}
+\title{\mytitle}
+
+\maketitle
+
+\subsection*{Analisis de complejidad}
+
+Primero que nada, haremos el analisis del lexer.
+
+\bigskip
+
+El lexer como tal esta implementado de manera que es una funcion que le metes un string y regresa los tokens en el string. Cada string es una linea y se llama la funcion una vez por linea.
+
+La funcion esta implementada de la siguiente manera
+\begin{verbatim}
+    
+tokens :: String -> [(String, Int)]
+tokens text = zip (getTokens text) (getTokenStates $ getStates text)
+\end{verbatim}
+
+Donde text es una linea de codigo, getTokens tiene una complejidad asintotica de O(n), getTokenStates tiene una complejidad de O(n), y getStates tiene una complejidad de O(n).
+
+Como estas complejidades se suman todas, la complejidad asintotica maxima que se tiene es de O(n).
+
+Con esto en mente, la complejidad del lexer es de O(n).
+
+\bigskip
+
+Nota: Se tienen funciones al inicio del programa para checar la correctez de los tokens, pero estas son en si un subset de las funciones que se usan en la funcion de tokens, asi que su complejidad no puede superar la de la funcion de la cual son un subset.
+
+\bigskip
+
+Despues se tiene el analizador sintactico, que tiene una serie de funciones que se llaman entre si, quitando un valor de la lista de tokens cada vez que se llaman, con excepcion de la funcion mas alta, que checa expresiones completas que no borra tokens. Todo esto, consiguiendo que como mucho se tenga una complejidad asintotica de O(n) donde n es el numero de tokens.
+
+\subsection*{Reflexion}
+
+Al final se obtiene un programa que se corre en una terminal tipo cmd/powershell y que con adaptaciones se puede usar en linux de igual manera. Este programa deja ver que tipo de expresiones contiene un programa como archivo html que se puede correr en un buscador. Este tipo de programas son muy usados por la comunidad ya que permiten hacer distinciones rapidas entre variables, palabras reservadas y cosas por el estilo, y siento que tienen una utilidad inmensa.
+
+\end{document}

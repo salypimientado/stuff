@@ -1,6 +1,6 @@
 {-# LANGUAGE MultiWayIf #-}
 import Data.Char ()
-import Data.Maybe (fromJust)
+import Data.Maybe (fromJust, isNothing)
 import System.Exit (die)
 import System.IO (hFlush, stdout)
 
@@ -9,7 +9,7 @@ main = do
   hFlush stdout
   file <- getLine
   contents <- readFile file
-  if 999 `notElem` concatMap (statesHelper 0) (map init $ lines contents)
+  if 999 `notElem` concatMap ((statesHelper 0) . init) (lines contents)
     then putStrLn "Archivo leido correctamente"
     else die "Se encontraron palabras no reconocidas en el archivo introducido"
 --{-
@@ -19,30 +19,30 @@ main = do
 lexExp  exp = do
   a <- checkTerm exp
   b <- checkRest a
-  if b == Nothing
+  if isNothing b
     then Just "mal mal mal"
     else Just "Expresion checada"
 
 checkTerm Nothing = Nothing
 checkTerm (Just []) = return $ Just []
-checkTerm ( Just ((token,state):exp) ) = do
+checkTerm ( Just ((token,state):exp) ) =
   if state `elem` [101,111] then return (Just exp) else Nothing
 
 checkRest ( Just [] ) = return $ Just [""]
 checkRest Nothing = Nothing
-checkRest ( Just ((token,state):exp) ) = do
+checkRest ( Just ((token,state):exp) ) =
   if
-    | state == 103 -> do
-        checkTerm ( Just exp ) >>= checkRest
-    | state == 104 -> do
-        checkTerm ( Just exp ) >>= checkRest
-    | otherwise -> return $ Nothing
+  | state == 103 -> do
+      checkTerm ( Just exp ) >>= checkRest
+  | state == 104 -> do
+      checkTerm ( Just exp ) >>= checkRest
+  | otherwise -> return $ Nothing
 -- De aqui para abajo es el lexer
 
-lexer :: [[Char]] -> [[Char]]
+lexer :: [String] -> [String]
 lexer = map lexLine
 
-lexLine :: [Char] -> [Char]
+lexLine :: String -> String
 lexLine = tokenToText . tokens
 
 {- Function to:
@@ -52,16 +52,16 @@ lexLine = tokenToText . tokens
   pass current is less than 100
 -}
 
-tokens :: [Char] -> [([Char], Int)]
+tokens :: String -> [(String, Int)]
 tokens text = zip (getTokens text) (getTokenStates $ getStates text)
 
-getTokens :: [Char] -> [[Char]]
+getTokens :: String -> [String]
 getTokens text = split (addDelimiters text (getStates text)) '~'
 
-getStates :: [Char] -> [Int]
+getStates :: String -> [Int]
 getStates text = removeOne $ statesHelper 0 (text ++ " ")
 
-statesHelper :: Int -> [Char] -> [Int]
+statesHelper :: Int -> String -> [Int]
 statesHelper _ [] = []
 statesHelper 6 [x] = [106]
 statesHelper prevState (x : chars) =
@@ -75,10 +75,10 @@ statesHelper prevState (x : chars) =
             then current : nextState 0 x : statesHelper (nextState 0 x) chars
             else current : statesHelper (nextState 0 x) chars
 
-tokenToText :: [([Char], Int)] -> [Char]
+tokenToText :: [(String, Int)] -> String
 tokenToText = tokenTextHelper
 
-tokenTextHelper :: [([Char], Int)] -> [Char]
+tokenTextHelper :: [(String, Int)] -> String
 tokenTextHelper [] = []
 tokenTextHelper ((token, state) : xs)
   --"Tipo                    Token\n"
@@ -95,7 +95,7 @@ tokenTextHelper ((token, state) : xs)
   | state == 111 = "Numero                 " ++ removeWhitespace token ++ "\n" ++ tokenTextHelper xs
   | state == 999 = "Error                  " ++ removeWhitespace token ++ "\n" ++ tokenTextHelper xs
 
-addDelimiters :: [Char] -> [Int] -> [Char]
+addDelimiters :: String -> [Int] -> String
 addDelimiters [] _ = []
 addDelimiters _ [] = []
 addDelimiters [c] _ = [c]
@@ -163,7 +163,7 @@ getTokenStates (x : xs) =
     then x : getTokenStates xs
     else getTokenStates xs
 
-removeWhitespace :: [Char] -> [Char]
+removeWhitespace :: String -> String
 removeWhitespace (x : xs) =
   if x == ' '
     then removeWhitespace xs

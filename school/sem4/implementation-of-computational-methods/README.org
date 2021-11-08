@@ -227,18 +227,6 @@
      δ : Q × Σ → Q es la función de transición,
      q ∈ Q es el estado inicial,
      F ⊆ Q es un conjunto de estados finales.
-
-     #+CAPTION: Ejemplo:
-     #+NAME: Ejemplo automata maquina expendedora
-     #+ATTR_ORG: :width 500
-     [[./imgs/Automaton.png]]
-
-     Ejemplo 2:
-     
-     #+CAPTION: Ejemplo:
-     #+NAME: Ejemplo 2
-     #+ATTR_ORG: :width 500
-       [[./imgs/Automaton2.png]]
      
      M = {Q, Σ, δ, q, F}
      Q = {q0,q1,q2}
@@ -415,15 +403,15 @@
       $M = (Q,\Sigma,\Gamma,\delta,q,a,r)$
 
       donde
-     | Termino  | Valor                      |
-     |----------+----------------------------|
-     | $Q$      | Conjunto finito de estados |
-     | $\Sigma$ | Alfabeto del input         |
-     | $\Gamma$ | Alfabeto de la cinta       |
-     | $\delta$ | Funcion de transicion      |
-     | $q$      | Estado inicial             |
-     | $a$      | Estado de aceptacion       |
-     | $r$      | Estado de rechazo          |
+     | Termino  | Valor                                         |
+     |----------+-----------------------------------------------|
+     | $Q$      | Conjunto finito de estados                    |
+     | $\Sigma$ | Alfabeto del input (no incluye palabra vacia) |
+     | $\Gamma$ | Alfabeto de la cinta (incluye palabra vacia)  |
+     | $\delta$ | Funcion de transicion                         |
+     | $q \in Q$ | Estado inicial                                |
+     | $a \in Q$ | Estado de aceptacion                          |
+     | $r \in Q$ | Estado de rechazo                             |
       
       
       
@@ -494,13 +482,249 @@ Todos las computaciones hechas son equivalentes o peores a una maquina de turing
 El reconocer si algo es correcto es mucho mas facil que resolver si lo esta
 
 **** Problemas P
-Problemas que se resuelven a lo mucho con un tiempo polinomial
+Problemas que se resuelven a lo mucho con un tiempo polinomial con maquinas deterministas
+
 
 - Se verifican facilmente
-
+  
 **** Problemas NP
 Problemas que se pueden resolver con maquinas no deterministas
 
 - NP significa non-deterministic polinomial
 - Se resuelven con maquinas no deterministas pero se verifican con maquinas deterministas
 
+*** Sesion 16
+
+**** Problemas NP-hard
+Problema que es reducido a una forma mas dificil
+
+**** Reduccion
+Hacer mas dificil un problema, y si este es resoluble entonces el problema mas facil es resoluble
+
+**** Problemas NP-complete
+Un problema que puede reducirse a NP, y tambien se puede reducir a NP-hard
+
++ Encapsulan todos los problemas que pueden ser reducidos a este
++ Si son resueltos todos los problemas que son reducibles a este son resueltos
+
+Ejemplos:
+
++ TSP
++ 
+  
+  
+*** Sesion 17
+
+**** Logica proposicional
+| Termino              | Significado    |
+|----------------------+----------------|
+| Conjuncion           | AND            |
+| Disyuncion           | OR             |
+| Negacion             | NOT            |
+| Implicacion          | if A then B==A |
+| Doble implicacion    | when A == B    |
+| Disyuncion exclusiva | XOR            |
+
+**** Reglas de inferencia
+
+***** 
+
+***** Resolucion
+1. Se hacen las reglas a partir de la proposicion
+2. Se convierte a OR y AND exclusivamente (Forma normal conjuntiva)
+3. Se pone el negativo de lo que se quiere probar en las reglas
+4. Se intenta llegar a una regla vacia con esto
+
+**** Prolog
+Lenguaje para programacion logica
+
+***** Fact
+Clausulas individuales que determinan una relacion o algo por el estilo
+
+***** Condition
+El head de una clausula
+
+| Tipo | Representacion |
+|------+----------------|
+| OR   | C:- A,B        |
+| AND  | C:- A;B        |
+
+- Solo es satisfiable si todas las clausulas separadas por comas son verdaderas
+
+Ejemplos:
+
+
+   #+begin_src prolog
+- largeAnimal (x) :- animal (x), large(x)
+- grandParent (x,y) :- father (x,z), parent (z,y)
+   #+end_src
+
+***** Predicates and functions
+Una relacion entre un numero de valores
+
+   #+begin_src prolog
+     cat(tom).
+     cat(felix).
+
+
+   #+end_src
+
+
+   
+   
+*** Sesion 18
+
+**** Prolog
+Se pueden hacer funciones numericas mediante recursion
+
+   #+begin_src prolog
+     %Suma hasta desde 0
+     sum(1,1).
+     sum(X,Y) :- X > 0, Z is X -1, sum(Z,W), Y is X+W.
+
+     %Longitud de una lista
+     xLength([],0).
+     xLength([X|XS],Y) :- xLength(XS,W), Y is W +1.
+   #+end_src
+   
+*** Sesion 19
+
+**** Knowledge based agents
+Forma de asuncion basada en conocimiento que se conforma por dos cosas, que es una base de conocimientos y un mecanismo de razonamiento
+
+- La manera principal para la que lenguajes como prolog son usados
+- Resuelven problemas de forma declarativa
+
+  
+*** Sesion 20
+
+**** Paralelismo
+- En programas secuenciales, cada comando se completa antes de empezar el siguiente
+
+- En una computadora con un solo core es imposible tener paralelismo, pero se puede tener concurrencia
+
+- Un programa concurrente especifica el posible cambio de estado de dos o mas procesos secuenciales
+
+***** Porque paralelizar?
+
+- Performance
+- Escalabilidad
+- Claridad
+
+
+***** Informacion general
++ Tiene que se determinista
++ No puede depender de la velocidad de lo que corre el algoritmo
+
+  
+**** Erlang
+Lenguaje funcional paralelo
+
+- Las variables tienen que empezar con mayuscula
+- Se puede usar = para asignar a variables
+- No se pueden reasignar variables
+  
+*** Sesion 21
+**** Erlang
+Las funciones tienen un cierto numero de parametros que se ponen en el sufijo
+   #+begin_src erlang
+-export([start/0])
+
+start() ->
+    io:format("Hello.~n").
+   #+end_src
+
+Las funciones son parecidas a las que se usan en Haskell pero se puede combinar con un poco del syntax de Prolog en el sentido de que se pueden tener muchas condiciones separadas con comas.
+
+   #+begin_src erlang
+factorial(N) when N>0, is_number(N) -> N * factorial(N-1).
+   #+end_src
+
+Las listas son iguales que en Haskell practicamente.
+
+   #+begin_src erlang
+     % Lista vacia
+     [].
+
+     % Para hacer append a una lista existente
+     [1 | [1]].
+     [1,1].
+
+     % Para concatenar se usa +​+ (no usar mucho porque es O(n) ya que las listas son linked lists)
+     [1,2] ++ [3,4].
+     [1,2,3,4].
+
+     hd([1,2,3]).
+     1
+
+     % O(n)
+     tl([1,2,3]).
+     3
+
+     % las tuplas se ponen con brackets
+     {1,2}
+
+     % las matrices se representan con listas de listas
+     
+     % los grafos se representan con listas de adyacencia, matrices, nodos y vertices etc.
+     
+     %
+     
+   #+end_src
+   
+*****  Concurrencia en Erlang
+La concurrencia es la abilidad de ejecutar funciones en paralelo sin afectarse entre si a menos que sea dicho de forma explicita que se quiere esto.
+
+La filosofia de erlang y su modelo de concurrencia esta basada en las siguientes ideas:
+- El mundo es concurrente
+- Las cosas en el mundo no se comparten informacion
+- Las cosas se comunican con mensajes
+- Las cosas fallan
+
+- Cada actividad concurrente en Erlang es un proceso
+- un proceso es una unidad de computo aislada que se ejecuta de manera concurrente con los otros procesos del sistema
+- Los procesos no comparten informacion con otros procesos
+- La unica forma en la que los procesos interactuan con otros es a traves de mensajes
+
+- Erlang no usa threads nativos para representar procesos
+- Tiene su propio scheduler en un VM, haciendo que sea muy eficiente y que gaste muy poca memoria
+- La eficiencia se mantiene sin importar la cantidad de procesos
+- No hay relacion entre threads del sistema operativo, todo corre bajo el proceso de Erlang
+
+
+Se utilizan nada mas tres cosas para manejar procesos:
++ spawn. para crear procesos
++ send. para mandar mensajes
++ receive. para recibir mensajes
+
+****** Creacion de procesos
+Las funciones spawn/1 o spawn/3 se usan para crear un proceso concurrente nuevo y regresan su id
+   #+begin_src erlang
+     Pid = spawn(Function).
+     Pid = spawn(Module,Funcion,Arguments).
+   #+end_src
+
+Estas funciones no se esperan a que la funcion sea evaluada y los procesos se eliminan de forma automatica una vez que terminan
+
+Los mensajes se mandan usando el operador ! (send)
+
+   #+begin_src erlang
+Pid ! Message.
+   #+end_src
+
+- Un mensaje puede se cualquier cosa
+- El return value de un mensaje es el mismo mensaje
+- Si el receptor no ha terminado con algo los mensajes se reciben en el orden en el que fueron mandados
+- Mandar un mensaje nunca falla; si le mandas un mensaje a un proceso no existente nomas se descarta
+
+
+Para recibir mensajes se usa la keyword receive
+   #+begin_src erlang
+receive
+    Message01 [when Guard01] -> Actions01;
+end
+   #+end_src
+
+- Cada proceso en Erlang tiene una mailbox donde los mensajes se guardan a como van llegando
+#+ATTR_ORG: :width 800
+[[file:~/stuff/school/sem4/implementation-of-computational-methods/README.org_20210523_162840_Vl34Uj.png]]

@@ -1,3 +1,7 @@
-//cosa que quiero que se ponga en el archivo xd
-
-//cosa extra xd
+b=7   
+a =32.4 *(-8.6 - b)/       6.1E-8//holis como le va xd
+d = a ^ b // Esto es un comentario
+variable = ((127*(121+2))+1) //comentario
+//hiklanld;fa
+1+2=312//wat
+//xd

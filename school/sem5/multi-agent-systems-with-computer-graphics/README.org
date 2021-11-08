@@ -1,0 +1,83 @@
+* Multi agent systems w/ computer graphics
+
+** Class content
+   
+*** Agent
+    Actor a system capable of making choices independently and interact with other agents within a system
+
+    - Communicate using ACL
+    - Try to fulfill their own interests
+    - Should be reactive and proactive
+    - Can collaborate if they think it will help them fulfill their objectives
+    - Choices work similarly to a state machine
+
+    Used in many fields:
+    - Economic sciences
+    - Game theory
+    - Logic
+    - Ecology
+    - Social sciences
+    
+*** Why multi agent systems?
+    - Ubiquity
+    - Interconection
+    - Intelligence
+    - Delegation
+    - Human orientation
+   
+*** How are agent different from objects?
+    - Agents are more autonomous than objects
+    - Agents are intelligent
+    - Agents are not passive, they are more proactive
+
+      * Objects do stuff for free
+      * Agents do stuff because they want to
+      * Agents do stuff for money
+     
+        
+*** Environment
+    Defined as a finite set of discrete and instantaneous states
+
+    Example for a car:
+    - E = {moving, stopped, off, broke down}
+   
+*** Purely reactive agents
+    Care only about present conditions
+
+    Ex. A thermostat
+
+    
+*** Agent architectures
+    - Deductive reasoning
+    - 
+    
+      
+*** Deductive reasoning agents
+    \phi is a theory (rule set)
+    \delta is a logical database that contains the world state
+    Ac is the agent's action set
+
+   $$\phi = { Day(monday) ^ Time(9am) -> Do(goToAgentsLecture),$$
+    $$Day(saturday) -> !Do(goToAgentsLecture),$$
+    $$Day(friday) ^ Time(7pm) -> Do(goToDinner) }$$
+    $$\delta = { Day(friday),$$
+    $$Time(7pm) }$$
+    $$Ac = { goToAgentsLecture, goToDinner }$$
+    $$\delta | -\phi = goToDinner$$
+    
+*** Practical reasoning agent
+    Human reasoning consists of two main activities:
+    1. Deliberation to decide what is to be achieved
+    2. Reasoning of means and ends to decide how to achieve these things
+
+    This type of agents tracks how successful attempts to do things are
+
+*** Vector
+    i = (1,0,0)
+    j = (0,1,0)
+    k = (0,0,1)
+    v = vxi,vyj,vzk
+    un vector son vectores unitarios (i, j, k) con escalares
+
+    Dot product to get angle between vectors
+    Cross product to get direction from vectors
