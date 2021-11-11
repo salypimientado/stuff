@@ -81,3 +81,62 @@
 
     Dot product to get angle between vectors
     Cross product to get direction from vectors
+
+    
+*** Illumination types
+   
+**** Point
+     
+**** Directional light
+
+*** Variables (in spanish)
+   | 𝑙  | Luz entrante (vector unitario).           |
+   | 𝑟  | Luz reflejada (vector unitario).          |
+   | 𝑛  | Normal a la superficie (vector unitario). |
+   | 𝑣  | Dirección de la cámara (vector unitario). |
+   | I  | Intensidad de la luz (escalar).           |
+   | 𝐼𝑎 | Intensidad ambiental (escalar).           |
+   | 𝐼𝑑 | Intensidad difusa (escalar).              |
+   | 𝐼𝑠 | Intensidad especular (escalar).           |
+   | 𝐼𝑙 | Intensidad de la luz (escalar).           |
+   | 𝑘𝑎 | Constante ambiental (escalar).            |
+   | 𝑘𝑑 | Constante difusa (escalar).               |
+   | 𝑘𝑠 | Constante especular (escalar).            |
+   | 𝜃  | Ángulo de incidencia (escalar).           |
+   | 𝜙  | Ángulo entre 𝑣 y 𝑟.                       |
+   | 𝛼  | Coeficiente especular.                    |
+     
+*** Basic illumination model
+    I = 𝐼𝑎 + 𝐼𝑑 + 𝐼𝑠
+    
+*** Ambient light
+    Ia = 𝑘𝑎𝐼𝑙
+
+*** Diffuse light
+    𝑰𝒅 =𝒌𝒅𝑰𝒍(𝒏∙𝒍)
+
+    
+*** Specular light
+    𝐼𝑠 = 𝑘𝑠𝐼𝑠(𝑣∙𝑟)^𝛼 
+
+  
+*** Phong's model
+    All types of light are summed up for each pixel in red, green and blue
+
+    
+*** Shading
+    Used to determine color
+
+*** Flat shading
+    The shade is constant and determined for each face in the object
+
+    
+*** Interpolated shading
+    Shades are determined on vertices and interpolated to achieve a smooth surface
+
+*** Texture mapping
+    Giving simple shapes and models color by mapping the model
+
+*** Ambient mapping
+    Reflections can be emulated by mapping textures to shiny surfaces
+
