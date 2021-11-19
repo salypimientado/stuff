@@ -5,7 +5,8 @@ core
 **/node_modules/**
 **/.ipynb_checkpoints/**
 **/ltximg/**
-**/sem4-cemex/
+**/sem4-cemex/**
+**/env/**
 
 # Compiled Object files
 *.slo
