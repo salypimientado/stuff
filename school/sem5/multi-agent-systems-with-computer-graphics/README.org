@@ -140,3 +140,12 @@
 *** Ambient mapping
     Reflections can be emulated by mapping textures to shiny surfaces
 
+*** Connecting the agent system with unity
+    Ngrok can be used as a tunnel to send data from python (Ngrok) to Unity in
+    order to display the information
+
+*** Displaying agents in Unity
+    - Create AgentInfo class (can be many different agents) and add [System.serializable]
+      before class creation
+    - Create AgentController which creates the agents from the data it receives
+      - Set prefabs for each agent to public to change from Ynity
