@@ -148,4 +148,12 @@
     - Create AgentInfo class (can be many different agents) and add [System.serializable]
       before class creation
     - Create AgentController which creates the agents from the data it receives
-      - Set prefabs for each agent to public to change from Ynity
+      - Set prefabs for each agent to public to change from Unity
+    
+
+*** Graphics optimization techniques
+    - Backface culling
+    - Occlusion culling
+    - View frustrum culling
+    - Level of detail
+    - Impostor (sussy baka amogus)
